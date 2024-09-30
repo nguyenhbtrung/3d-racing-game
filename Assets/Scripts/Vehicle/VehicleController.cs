@@ -10,7 +10,7 @@ public class VehicleController : MonoBehaviour
     public float Kph { get => kph; set => kph = value; }
     protected Rigidbody Rb { get => rb; set => rb = value; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         Rb = GetComponent<Rigidbody>();
     }
