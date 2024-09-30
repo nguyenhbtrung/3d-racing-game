@@ -5,7 +5,7 @@ using UnityEngine;
 public class VehicleController : MonoBehaviour
 {
     private Rigidbody rb;
-    private float kph;
+    public float kph;
 
     public float Kph { get => kph; set => kph = value; }
     protected Rigidbody Rb { get => rb; set => rb = value; }
@@ -15,7 +15,7 @@ public class VehicleController : MonoBehaviour
         Rb = GetComponent<Rigidbody>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         CalculateKph();
     }

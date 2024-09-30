@@ -1051,6 +1051,7 @@ GameObject:
   - component: {fileID: 4958948297532759038}
   - component: {fileID: 4470190757443617275}
   - component: {fileID: 6069780389394822667}
+  - component: {fileID: 6069780389394822668}
   m_Layer: 0
   m_Name: car01
   m_TagString: Player
@@ -1068,6 +1069,62 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d0c471c8ff30d647b9d903a0229b51c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kph: 0
+  enginePower:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 4.3
+      value: 101
+      inSlope: 0.07271543
+      outSlope: 0.07271543
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.1239838
+    - serializedVersion: 3
+      time: 7903
+      value: 472
+      inSlope: -0.007668195
+      outSlope: -0.007668195
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.5608892
+    - serializedVersion: 3
+      time: 9529
+      value: 259
+      inSlope: -0.24362652
+      outSlope: -0.24362652
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.94347286
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  gears:
+  - 4
+  - 2.8
+  - 2
+  - 1.4
+  - 0.9
+  - 0.5
+  shiftGearMaxRPM: 5000
+  shiftGearMinRPM: 8000
+  driveType: 0
+--- !u!114 &6069780389394822668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6069780389394822666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8824c97909e6ad24983b0274e8152620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6135205709313025374

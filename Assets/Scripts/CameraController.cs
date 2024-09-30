@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
         defaultFOV = Camera.main.fieldOfView;
     }
 
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         FollowPlayer();
         BoostFOV();
