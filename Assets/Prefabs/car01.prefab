@@ -557,8 +557,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6522628217436919210}
   - component: {fileID: 2332284282071601071}
-  - component: {fileID: 7409285147531862496}
-  - component: {fileID: 2676616971985917000}
   m_Layer: 0
   m_Name: car01
   m_TagString: Player
@@ -619,58 +617,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7409285147531862496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5361693579711428702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 664954b253aaf7842b4d06e4219d13c4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  driveType: 2
-  wheels:
-  - {fileID: 5695691972766719539}
-  - {fileID: 4666949864255529934}
-  - {fileID: 4029102253587317624}
-  - {fileID: 1035338768765650821}
-  wheelMesh:
-  - {fileID: 30232035321725908}
-  - {fileID: 373667363913962583}
-  - {fileID: 7652399086789472885}
-  - {fileID: 5435879848243276554}
-  motorTorque: 10000
-  radius: 6
-  steeringMax: 20
-  centreOfGravityOffset: -1
-  wheelbase: 0
-  trackWidth: 0
-  kph: 0
-  downForceValue: 50
-  brakeTorque: 90000
-  slip:
-  - 0
-  - 0
-  - 0
-  - 0
---- !u!114 &2676616971985917000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5361693579711428702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a602edb6069800d45b9292ae095445b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vertical: 0
-  horizontal: 0
-  handBrake: 0
 --- !u!1 &5435879848243276554
 GameObject:
   m_ObjectHideFlags: 0
