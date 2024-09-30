@@ -9,14 +9,18 @@ public class CarController : VehicleController
     [SerializeField] private float[] gears;
     [SerializeField] private float shiftGearMaxRPM;
     [SerializeField] private float shiftGearMinRPM;
+    [SerializeField] private float steerRadius = 6;
 
 
     private Wheel[] wheels;
+    private Transform centerOfMass;
     private IInputManager inputManager;
 
     private float motorTorque;
     private float wheelsRPM;
     private float engineRPM;
+    private float wheelbase;
+    private float trackWidth;
     private int gearNum = 0;
 
     internal enum DriveType
@@ -33,12 +37,13 @@ public class CarController : VehicleController
         base.Awake();
         InitWheels();
         inputManager = GetComponent<IInputManager>();
-        
+        centerOfMass = transform.Find("Center Of Mass");
+        Rb.centerOfMass = centerOfMass.localPosition;
     }
 
     private void Start()
     {
-        
+        CalculateSpecifications();
     }
 
     protected override void Update()
@@ -51,9 +56,35 @@ public class CarController : VehicleController
 
     private void FixedUpdate()
     {
+        Steer();
         Move();
     }
 
+    private void Steer()
+    {
+        float horizontal = inputManager.GetHorizontalInput();
+        WheelCollider frontLeft = null, frontRight = null;
+        foreach (var wheel in wheels)
+        {
+            if (wheel.Name == "Front Left") frontLeft = wheel.Collider;
+            if (wheel.Name == "Front Right") frontRight = wheel.Collider;
+        }
+        if (horizontal > 0)
+        {
+            frontLeft.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerRadius + (trackWidth / 2))) * horizontal;
+            frontRight.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerRadius - (trackWidth / 2))) * horizontal;
+        }
+        else if (horizontal < 0)
+        {
+            frontLeft.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerRadius - (trackWidth / 2))) * horizontal;
+            frontRight.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerRadius + (trackWidth / 2))) * horizontal;
+        }
+        else
+        {
+            frontLeft.steerAngle = 0;
+            frontRight.steerAngle = 0;
+        }
+    }
 
     private void CalculateEnginePower()
     {
@@ -102,6 +133,22 @@ public class CarController : VehicleController
         {
             wheel.AnimateWheel();
         }
+    }
+
+    private void CalculateSpecifications()
+    {
+        Vector3 frontLeft = Vector3.zero, 
+            frontRight = Vector3.zero,
+            backLeft = Vector3.zero;
+        foreach (var wheel in wheels)
+        {
+            if (wheel.Name == "Front Left") frontLeft = wheel.Collider.transform.position;
+            if (wheel.Name == "Front Right") frontRight = wheel.Collider.transform.position;
+            if (wheel.Name == "Back Left") backLeft = wheel.Collider.transform.position;
+        }
+
+        wheelbase = Vector3.Distance(frontLeft, backLeft);
+        trackWidth = Vector3.Distance(frontLeft, frontRight);
     }
 
     private bool IsGrounded()

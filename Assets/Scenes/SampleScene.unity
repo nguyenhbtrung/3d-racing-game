@@ -1114,6 +1114,7 @@ MonoBehaviour:
   - 0.5
   shiftGearMaxRPM: 5000
   shiftGearMinRPM: 8000
+  steerRadius: 6
   driveType: 0
 --- !u!114 &6069780389394822668
 MonoBehaviour:
