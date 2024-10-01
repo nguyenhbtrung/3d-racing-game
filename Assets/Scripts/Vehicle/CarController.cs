@@ -7,9 +7,10 @@ public class CarController : VehicleController
 {
     [SerializeField] private AnimationCurve enginePower;
     [SerializeField] private float[] gears;
+    [SerializeField] private float[] gearChangeSpeeds;
     [SerializeField] private float shiftGearMaxRPM;
     [SerializeField] private float shiftGearMinRPM;
-    [SerializeField] private float steerRadius = 6;
+    [SerializeField] private float steerMinRadius = 6;
 
 
     private Wheel[] wheels;
@@ -17,10 +18,14 @@ public class CarController : VehicleController
     private IInputManager inputManager;
 
     private float motorTorque;
+    private float brakeTorque;
     private float wheelsRPM;
     private float engineRPM;
     private float wheelbase;
     private float trackWidth;
+    private float steerCurrentRadius;
+    private float vertical;
+    private float horizontal;
     private int gearNum = 0;
 
     internal enum DriveType
@@ -49,21 +54,42 @@ public class CarController : VehicleController
     protected override void Update()
     {
         base.Update();
+
+        vertical = inputManager.GetVerticalInput();
+        horizontal = inputManager.GetHorizontalInput();
+
+        AdjustDrag();
+
         CalculateEnginePower();
         AutoShiftGear();
         AnimateWheels();
+
+        Steer();
+        Move();
+        Brake();
+    }
+
+    private void AdjustDrag()
+    {
+        if (vertical != 0)
+        {
+            Rb.drag = 0.005f;
+        }
+        if (vertical == 0)
+        {
+            Rb.drag = 0.1f;
+        }
     }
 
     private void FixedUpdate()
     {
-        Steer();
-        Move();
+        
     }
 
     private void Steer()
     {
-        float horizontal = inputManager.GetHorizontalInput();
         WheelCollider frontLeft = null, frontRight = null;
+        steerCurrentRadius = steerMinRadius + Kph / 20;
         foreach (var wheel in wheels)
         {
             if (wheel.Name == "Front Left") frontLeft = wheel.Collider;
@@ -71,13 +97,13 @@ public class CarController : VehicleController
         }
         if (horizontal > 0)
         {
-            frontLeft.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerRadius + (trackWidth / 2))) * horizontal;
-            frontRight.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerRadius - (trackWidth / 2))) * horizontal;
+            frontLeft.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerCurrentRadius + (trackWidth / 2))) * horizontal;
+            frontRight.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerCurrentRadius - (trackWidth / 2))) * horizontal;
         }
         else if (horizontal < 0)
         {
-            frontLeft.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerRadius - (trackWidth / 2))) * horizontal;
-            frontRight.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerRadius + (trackWidth / 2))) * horizontal;
+            frontLeft.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerCurrentRadius - (trackWidth / 2))) * horizontal;
+            frontRight.steerAngle = Mathf.Rad2Deg * Mathf.Atan(wheelbase / (steerCurrentRadius + (trackWidth / 2))) * horizontal;
         }
         else
         {
@@ -96,7 +122,8 @@ public class CarController : VehicleController
 
         CalculateWheelsRPM();
         engineRPM = Mathf.SmoothDamp(engineRPM, minEngineRPM + Mathf.Abs(wheelsRPM) * engineRPMMultiplier * gears[gearNum], ref velocity, smoothTime);
-        motorTorque = motorTorqueMultiplier * inputManager.GetVerticalInput() * enginePower.Evaluate(engineRPM) * gears[gearNum];
+        engineRPM = Mathf.Clamp(engineRPM, engineRPM, shiftGearMaxRPM + 1000);
+        motorTorque = motorTorqueMultiplier * vertical * enginePower.Evaluate(engineRPM);
     }
 
     private void CalculateWheelsRPM()
@@ -111,13 +138,20 @@ public class CarController : VehicleController
         
     }
 
+
+    private bool CheckGears()
+    {
+        return (Kph >= gearChangeSpeeds[gearNum]);
+    }
     private void AutoShiftGear()
     {
         if (!IsGrounded())
         {
             return;
         }
-        if (engineRPM > shiftGearMaxRPM && gearNum < gears.Length - 1 && !IsReverse())
+        if (engineRPM > shiftGearMaxRPM &&
+            gearNum < gears.Length - 1 &&
+            !IsReverse() && CheckGears())
         {
             gearNum++;
         }
@@ -132,6 +166,28 @@ public class CarController : VehicleController
         foreach (var wheel in wheels)
         {
             wheel.AnimateWheel();
+        }
+    }
+
+    private void Brake()
+    {
+        brakeTorque = 10;
+        if (vertical < 0)
+        {
+            brakeTorque = (Kph >= 10) ? 1000 : 10;
+        }
+        
+
+        foreach (var wheel in wheels)
+        {
+            if (inputManager.IsBraking())
+            {
+                wheel.Collider.brakeTorque = brakeTorque;
+            }
+            else
+            {
+                wheel.Collider.brakeTorque = 0;
+            }
         }
     }
 

@@ -13,4 +13,14 @@ public class PlayerInputManager : MonoBehaviour, IInputManager
     {
         return Input.GetAxis("Vertical");
     }
+
+    public bool IsBoosting()
+    {
+        return Input.GetKey(KeyCode.LeftShift);
+    }
+
+    public bool IsBraking()
+    {
+        return Input.GetKey(KeyCode.Space);
+    }
 }
