@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CarController : VehicleController
@@ -69,6 +70,65 @@ public class CarController : VehicleController
         Steer();
         Move();
         Brake();
+        Drift();
+        AddWheelsEffect();
+    }
+
+    private void Drift()
+    {
+        float friction;
+        foreach (var wheel in wheels)
+        {
+            if (inputManager.IsBraking())
+            {
+                friction = (wheel.WheelType == WheelType.Front) ? 1.0f : 0.3f;
+            }
+            else
+            {
+                friction = ((kph * 2) / 300) + 1;
+            }
+            SetWheelFriction(friction, wheel.Collider);
+        }
+
+        if (inputManager.IsBraking())
+        {
+            Rb.AddForce((Kph / 400) * 10000 * transform.forward);
+        }
+        
+    }
+
+    private static void SetWheelFriction(float friction, WheelCollider collider)
+    {
+        WheelFrictionCurve forwardFriction = collider.forwardFriction;
+        WheelFrictionCurve sidewaysFriction = collider.sidewaysFriction;
+        forwardFriction.extremumValue = sidewaysFriction.extremumValue =
+            forwardFriction.asymptoteValue = sidewaysFriction.asymptoteValue = friction;
+        collider.forwardFriction = forwardFriction;
+        collider.sidewaysFriction = sidewaysFriction;
+    }
+
+    private void AddWheelsEffect()
+    {
+        
+        foreach (var wheel in wheels)
+        {
+            if (wheel.WheelType != WheelType.Back)
+            {
+                continue;
+            }
+            if (inputManager.IsBraking())
+            {
+                wheel.SkidMark.emitting = true;
+                if (kph >= 60)
+                {
+                wheel.SmokeParticle.Emit(1);
+                }
+            }
+            else
+            {
+                wheel.SkidMark.emitting = false;
+            }
+        }
     }
 
     private void AdjustDrag()
@@ -262,10 +322,14 @@ public class CarController : VehicleController
 
         Transform wheelMeshesParent = transform.Find("Wheel Meshes");
         Transform wheelCollidersParent = transform.Find("Wheel Colliders");
+        Transform wheelSkidMarksParent = transform.Find("Skid Marks");
+        Transform wheelSmokeParticlesParent = transform.Find("Smoke Particles");
         foreach (var wheel in wheels)
         {
             wheel.Mesh = wheelMeshesParent.Find(wheel.Name).GetComponent<MeshRenderer>();
             wheel.Collider = wheelCollidersParent.Find(wheel.Name).GetComponent<WheelCollider>();
+            wheel.SkidMark = wheelSkidMarksParent.Find(wheel.Name).GetComponent<TrailRenderer>();
+            wheel.SmokeParticle = wheelSmokeParticlesParent.Find(wheel.Name).GetComponent<ParticleSystem>();
             if (wheel.Name.StartsWith("Front"))
             {
                 wheel.WheelType = WheelType.Front;
