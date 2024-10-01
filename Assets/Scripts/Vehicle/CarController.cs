@@ -109,9 +109,22 @@ public class CarController : VehicleController
 
     private void AddWheelsEffect()
     {
-        
+
         foreach (var wheel in wheels)
         {
+            WheelHit wheelHit;
+            wheel.Collider.GetGroundHit(out wheelHit);
+            float slip = wheelHit.sidewaysSlip;
+            if (Mathf.Abs(slip) >= 1)
+            {
+                wheel.SkidMark.emitting = true;
+                wheel.SmokeParticle.Emit(1);
+            }
+            else
+            {
+                wheel.SkidMark.emitting = false;
+            }
+
             if (wheel.WheelType != WheelType.Back)
             {
                 continue;
@@ -121,13 +134,18 @@ public class CarController : VehicleController
                 wheel.SkidMark.emitting = true;
                 if (kph >= 60)
                 {
-                wheel.SmokeParticle.Emit(1);
+                    wheel.SmokeParticle.Emit(1);
                 }
             }
             else
             {
                 wheel.SkidMark.emitting = false;
             }
+        }
+
+        foreach (var wheel in wheels)
+        {
+            
         }
     }
 
