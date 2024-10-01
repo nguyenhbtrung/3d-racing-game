@@ -122,6 +122,11 @@ public class CarController : VehicleController
 
         foreach (var wheel in wheels)
         {
+            if (!wheel.Collider.isGrounded)
+            {
+                wheel.SkidMark.emitting = false;
+                continue;
+            }
             WheelHit wheelHit;
             wheel.Collider.GetGroundHit(out wheelHit);
             float slip = wheelHit.sidewaysSlip;
@@ -151,6 +156,7 @@ public class CarController : VehicleController
             {
                 wheel.SkidMark.emitting = false;
             }
+            
         }
 
         foreach (var wheel in wheels)
