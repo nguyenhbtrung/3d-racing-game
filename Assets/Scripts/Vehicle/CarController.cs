@@ -26,6 +26,7 @@ public class CarController : VehicleController
     private float steerCurrentRadius;
     private float vertical;
     private float horizontal;
+    private float downForce = 10;
     private int gearNum = 0;
 
     internal enum DriveType
@@ -58,6 +59,7 @@ public class CarController : VehicleController
         vertical = inputManager.GetVerticalInput();
         horizontal = inputManager.GetHorizontalInput();
 
+        AddDownForce();
         AdjustDrag();
 
         CalculateEnginePower();
@@ -273,6 +275,11 @@ public class CarController : VehicleController
                 wheel.WheelType = WheelType.Back;
             }
         }
+    }
+
+    private void AddDownForce()
+    {
+        Rb.AddForce(Vector3.down * downForce * Rb.velocity.magnitude);
     }
 
 }
