@@ -28,6 +28,7 @@ public class CarController : VehicleController
     private float vertical;
     private float horizontal;
     private float downForce = 10;
+    private float thrust = 5000;
     private int gearNum = 0;
 
     internal enum DriveType
@@ -68,10 +69,19 @@ public class CarController : VehicleController
         AnimateWheels();
 
         Steer();
+        Boost();
         Move();
         Brake();
         Drift();
         AddWheelsEffect();
+    }
+
+    private void Boost()
+    {
+        if (inputManager.IsBoosting())
+        {
+            Rb.AddForce(transform.forward * thrust);
+        }
     }
 
     private void Drift()
@@ -79,7 +89,7 @@ public class CarController : VehicleController
         float friction;
         foreach (var wheel in wheels)
         {
-            if (inputManager.IsBraking())
+            if (inputManager.IsHandBraking())
             {
                 friction = (wheel.WheelType == WheelType.Front) ? 1.0f : 0.3f;
             }
@@ -90,7 +100,7 @@ public class CarController : VehicleController
             SetWheelFriction(friction, wheel.Collider);
         }
 
-        if (inputManager.IsBraking())
+        if (inputManager.IsHandBraking())
         {
             Rb.AddForce((Kph / 400) * 10000 * transform.forward);
         }
@@ -129,7 +139,7 @@ public class CarController : VehicleController
             {
                 continue;
             }
-            if (inputManager.IsBraking())
+            if (inputManager.IsHandBraking())
             {
                 wheel.SkidMark.emitting = true;
                 if (kph >= 60)
@@ -260,7 +270,7 @@ public class CarController : VehicleController
 
         foreach (var wheel in wheels)
         {
-            if (inputManager.IsBraking())
+            if (inputManager.IsHandBraking())
             {
                 wheel.Collider.brakeTorque = brakeTorque;
             }

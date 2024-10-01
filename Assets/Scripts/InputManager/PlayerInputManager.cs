@@ -19,7 +19,7 @@ public class PlayerInputManager : MonoBehaviour, IInputManager
         return Input.GetKey(KeyCode.LeftShift);
     }
 
-    public bool IsBraking()
+    public bool IsHandBraking()
     {
         return Input.GetKey(KeyCode.Space);
     }

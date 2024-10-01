@@ -3,6 +3,6 @@ public interface IInputManager
 {
     float GetVerticalInput();
     float GetHorizontalInput();
-    bool IsBraking();
+    bool IsHandBraking();
     bool IsBoosting();
 }
