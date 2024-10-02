@@ -691,6 +691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedometerUI: {fileID: 2774154411081045895, guid: c030ab62cdb30834e86a73850ce1afab, type: 3}
   kph: 0
+  startLane: 1
   enginePower:
     serializedVersion: 2
     m_Curve:

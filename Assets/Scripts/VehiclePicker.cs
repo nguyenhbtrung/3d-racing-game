@@ -32,5 +32,6 @@ public class VehiclePicker : MonoBehaviour
             Destroy(vehicleObj);
         }
         vehicleObj = Instantiate(vehicleTemplates[index].prefab, Vector3.up * 1.7f, Quaternion.identity);
+        vehicleObj.GetComponent<VehicleController>().enabled = false;
     }
 }

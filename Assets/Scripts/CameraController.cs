@@ -24,8 +24,23 @@ public class CameraController : MonoBehaviour
         defaultFOV = Camera.main.fieldOfView;
     }
 
+    private IEnumerator FindPlayer()
+    {
+        while (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").transform;
+            yield return null;
+        }
+        cameraConstraint = player.Find("Camera Constraint");
+        controller = player.GetComponent<VehicleController>();
+    }
+
     private void FixedUpdate()
     {
+        if (controller == null)
+        {
+            return;
+        }
         FollowPlayer();
         BoostFOV();
     }

@@ -7,10 +7,12 @@ public class VehicleController : MonoBehaviour
     [SerializeField] private GameObject speedometerUI;
     private Rigidbody rb;
     public float kph;
+    [SerializeField] private int startLane;
 
     public float Kph { get => kph; set => kph = value; }
     protected Rigidbody Rb { get => rb; set => rb = value; }
     public GameObject SpeedometerUI { get => speedometerUI; set => speedometerUI = value; }
+    public int StartLane { get => startLane; set => startLane = value; }
 
     protected virtual void Awake()
     {
