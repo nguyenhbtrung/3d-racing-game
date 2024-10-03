@@ -16,7 +16,7 @@ public class CarController : VehicleController
 
     private Wheel[] wheels;
     private Transform centerOfMass;
-    private IInputManager inputManager;
+    
 
     private float motorTorque;
     private float brakeTorque;
@@ -25,10 +25,7 @@ public class CarController : VehicleController
     private float wheelbase;
     private float trackWidth;
     private float steerCurrentRadius;
-    private float vertical;
-    private float horizontal;
     private float downForce = 10;
-    private float thrust = 2500;
     private int gearNum = 0;
 
     internal enum DriveType
@@ -41,14 +38,13 @@ public class CarController : VehicleController
 
     public float EngineRPM { get => engineRPM; set => engineRPM = value; }
     public int GearNum { get => gearNum; set => gearNum = value; }
-    public float Vertical { get => vertical; set => vertical = value; }
-    public float Horizontal { get => horizontal; set => horizontal = value; }
+    
 
     protected override void Awake()
     {
         base.Awake();
         InitWheels();
-        inputManager = GetComponent<IInputManager>();
+        
         centerOfMass = transform.Find("Center Of Mass");
         Rb.centerOfMass = centerOfMass.localPosition;
     }
@@ -62,9 +58,6 @@ public class CarController : VehicleController
     {
         base.Update();
 
-        Vertical = inputManager.GetVerticalInput();
-        Horizontal = inputManager.GetHorizontalInput();
-
         AddDownForce();
         AdjustDrag();
 
@@ -73,31 +66,13 @@ public class CarController : VehicleController
         AnimateWheels();
 
         Steer();
-        Boost();
         Move();
         Brake();
         Drift();
         AddWheelsEffect();
     }
 
-    private void Boost()
-    {
-        if (inputManager.IsActivatedBoost())
-        {
-            IsBoosting = true;
-        }
-        if (Nitrous <= 1 || inputManager.IsHandBraking() || vertical < 0)
-        {
-            IsBoosting = false;
-        }
-
-        float nitrousConsumption = 7 * Time.deltaTime;
-        if (IsBoosting)
-        {
-            Rb.AddForce(transform.forward * thrust);
-            Nitrous -= nitrousConsumption;
-        }
-    }
+    
 
     private void Drift()
     {
@@ -190,11 +165,6 @@ public class CarController : VehicleController
         {
             Rb.drag = 0.1f;
         }
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 
     private void Steer()
