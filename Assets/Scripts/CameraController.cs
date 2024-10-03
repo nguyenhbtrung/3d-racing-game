@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     private Transform cameraConstraint;
     private float speed;
     private float defaultFOV;
+    private bool isActivatedBoost = false;
 
     [SerializeField] private float boostedFOV;
     [SerializeField] [Range(0, 5)] private float smoothTime;
@@ -22,17 +23,6 @@ public class CameraController : MonoBehaviour
         cameraConstraint = player.Find("Camera Constraint");
         controller = player.GetComponent<VehicleController>();
         defaultFOV = Camera.main.fieldOfView;
-    }
-
-    private IEnumerator FindPlayer()
-    {
-        while (player == null)
-        {
-            player = GameObject.FindGameObjectWithTag("Player").transform;
-            yield return null;
-        }
-        cameraConstraint = player.Find("Camera Constraint");
-        controller = player.GetComponent<VehicleController>();
     }
 
     private void FixedUpdate()
@@ -56,13 +46,34 @@ public class CameraController : MonoBehaviour
 
     private void BoostFOV()
     {
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (controller.IsBoosting && !isActivatedBoost)
         {
+            
             Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, boostedFOV, Time.deltaTime * smoothTime);
         }
         else
         {
-            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, defaultFOV, Time.deltaTime * smoothTime);
+            Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, defaultFOV, Time.deltaTime * smoothTime / 5);
         }
+
+        if (!controller.IsBoosting)
+        {
+            isActivatedBoost = false;
+        }
+
+        if (Camera.main.fieldOfView >= boostedFOV)
+        {
+            isActivatedBoost = true;
+            
+        }
+
+        //if (Input.GetKey(KeyCode.LeftShift))
+        //{
+        //    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, boostedFOV, Time.deltaTime * smoothTime);
+        //}
+        //else
+        //{
+        //    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, defaultFOV, Time.deltaTime * smoothTime);
+        //}
     }
 }

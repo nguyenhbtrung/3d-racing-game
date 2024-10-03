@@ -8,6 +8,7 @@ public class CarSpeedometer : MonoBehaviour
     [SerializeField] private Text kphText;
     [SerializeField] private Text currentGearText;
     [SerializeField] private Transform needle;
+    [SerializeField] private Slider nitrousSlider;
 
     private float startRotNeedle = 32;
     private float endRotNeedle = -210;
@@ -25,6 +26,7 @@ public class CarSpeedometer : MonoBehaviour
         kphText.text = carController.Kph.ToString("F0");
         UpdateGearNum();
         UpdateNeedle();
+        UpdateNitrous();
     }
 
     private void UpdateGearNum()
@@ -52,5 +54,10 @@ public class CarSpeedometer : MonoBehaviour
         float ratio = rpm / maxRPM;
         float currentRot = startRotNeedle + (endRotNeedle - startRotNeedle) * ratio;
         needle.eulerAngles = new Vector3(0, 0, currentRot);
+    }
+
+    private void UpdateNitrous()
+    {
+        nitrousSlider.value = 0.64f * carController.Nitrous / carController.MaxNitrous;
     }
 }

@@ -21,14 +21,14 @@ public class CarController : VehicleController
     private float motorTorque;
     private float brakeTorque;
     private float wheelsRPM;
-    public float engineRPM;
+    private float engineRPM;
     private float wheelbase;
     private float trackWidth;
     private float steerCurrentRadius;
     private float vertical;
     private float horizontal;
     private float downForce = 10;
-    private float thrust = 5000;
+    private float thrust = 2500;
     private int gearNum = 0;
 
     internal enum DriveType
@@ -82,9 +82,20 @@ public class CarController : VehicleController
 
     private void Boost()
     {
-        if (inputManager.IsBoosting())
+        if (inputManager.IsActivatedBoost())
+        {
+            IsBoosting = true;
+        }
+        if (Nitrous <= 1 || inputManager.IsHandBraking() || vertical < 0)
+        {
+            IsBoosting = false;
+        }
+
+        float nitrousConsumption = 7 * Time.deltaTime;
+        if (IsBoosting)
         {
             Rb.AddForce(transform.forward * thrust);
+            Nitrous -= nitrousConsumption;
         }
     }
 
@@ -99,7 +110,7 @@ public class CarController : VehicleController
             }
             else
             {
-                friction = ((kph * 2) / 300) + 1;
+                friction = ((Kph * 2) / 300) + 1;
             }
             SetWheelFriction(friction, wheel.Collider);
         }
@@ -151,7 +162,7 @@ public class CarController : VehicleController
             if (inputManager.IsHandBraking())
             {
                 wheel.SkidMark.emitting = true;
-                if (kph >= 60)
+                if (Kph >= 60)
                 {
                     wheel.SmokeParticle.Emit(1);
                 }
