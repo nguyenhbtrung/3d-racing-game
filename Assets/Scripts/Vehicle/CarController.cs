@@ -207,6 +207,10 @@ public class CarController : VehicleController
         {
             wheelsRPM = (Mathf.Abs(wheelsRPM) >= Mathf.Abs(lastWheelsRPM)) ? wheelsRPM : lastWheelsRPM;
         }
+        if ((Vertical <= 0 && wheelsRPM > 0) || (Vertical >= 0 && wheelsRPM < 0))
+        {
+            wheelsRPM = (Mathf.Abs(wheelsRPM) <= Mathf.Abs(lastWheelsRPM)) ? wheelsRPM : lastWheelsRPM;
+        }
         EngineRPM = Mathf.SmoothDamp(EngineRPM, minEngineRPM + Mathf.Abs(wheelsRPM) * engineRPMMultiplier * gears[GearNum], ref velocity, smoothTime);
         EngineRPM = Mathf.Clamp(EngineRPM, EngineRPM, ShiftGearMaxRPM + 1000);
         motorTorque = motorTorqueMultiplier * Vertical * enginePower.Evaluate(EngineRPM);
