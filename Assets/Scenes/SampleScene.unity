@@ -26609,8 +26609,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWaypoint: {fileID: 353582197}
+  vehicleController: {fileID: 3715936788858147071}
   horizontalSpeed: 100
   horizontal: 0
+  vertical: 0
 --- !u!33 &8108739969242102244
 MeshFilter:
   m_ObjectHideFlags: 0

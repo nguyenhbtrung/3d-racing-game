@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +6,11 @@ using UnityEngine;
 public class RacerBotInputManager : MonoBehaviour, IInputManager
 {
     [SerializeField] private Waypoint targetWaypoint;
+    [SerializeField] private VehicleController vehicleController;
     [SerializeField] private float horizontalSpeed;
 
     public float horizontal;
+    public float vertical;
     private void Update()
     {
     }
@@ -21,8 +24,10 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         float sideValue = Vector3.Dot(transform.right, direction);
         sideValue = (forwardValue > 0) ? sideValue : Mathf.Sign(sideValue);
         //sideValue = (Mathf.Abs(sideValue) > 0.3 ) ? Mathf.Sign(sideValue) : 0;
-        horizontal += sideValue * horizontalSpeed * Time.deltaTime;
-        horizontal = Mathf.Clamp(horizontal, -1, 1);
+
+        horizontal = sideValue;
+        vertical = forwardValue;
+
         return sideValue;
     }
 
@@ -38,7 +43,7 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
 
     public bool IsHandBraking()
     {
-        return false;
+        return (vehicleController.Kph >= 40 && (Mathf.Abs(horizontal) > 0.9 || vertical < 0));
     }
 
     private void OnTriggerEnter(Collider other)
