@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class RacerBotInputManager : MonoBehaviour, IInputManager
 {
-    [SerializeField] private Transform targert;
+    [SerializeField] private Waypoint targetWaypoint;
     [SerializeField] private float horizontalSpeed;
 
     public float horizontal;
     private void Update()
     {
-        
     }
 
     public float GetHorizontalInput()
     {
-        Vector3 direction = targert.position - transform.position;
+        Vector3 target = targetWaypoint.transform.position;
+        Vector3 direction = target - transform.position;
         direction = new Vector3(direction.x, 0, direction.z).normalized;
         float forwardValue = Vector3.Dot(transform.forward, direction);
         float sideValue = Vector3.Dot(transform.right, direction);
@@ -39,5 +39,13 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
     public bool IsHandBraking()
     {
         return false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Waypoint>() == targetWaypoint)
+        {
+            targetWaypoint = targetWaypoint.GetRandomNeighbour();
+        }
     }
 }
