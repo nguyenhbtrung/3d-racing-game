@@ -17,7 +17,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] [Range(0, 5)] private float smoothTime;
 
 
-    private void Awake()
+    private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         cameraConstraint = player.Find("Camera Constraint");
