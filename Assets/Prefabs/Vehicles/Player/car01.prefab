@@ -621,6 +621,7 @@ GameObject:
   - component: {fileID: 8234076701844932446}
   - component: {fileID: 3572217605315140835}
   - component: {fileID: 693584743056121531}
+  - component: {fileID: 1630717117434704619}
   m_Layer: 0
   m_Name: car01
   m_TagString: Player
@@ -775,6 +776,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8824c97909e6ad24983b0274e8152620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1630717117434704619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6356010169918276720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1032647105d3648b0992148bb4832f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  engineSoundStyle: 1
+  lowAccelClip: {fileID: 8300000, guid: 64a15afa6871c824091aaad5ad1cfba9, type: 3}
+  lowDecelClip: {fileID: 8300000, guid: 64a15afa6871c824091aaad5ad1cfba9, type: 3}
+  highAccelClip: {fileID: 8300000, guid: 43e1804c340b56c47870a041ff73bfac, type: 3}
+  highDecelClip: {fileID: 8300000, guid: 488c7f237ce88b7418e2bff9752358b9, type: 3}
+  pitchMultiplier: 1
+  lowPitchMin: 1
+  lowPitchMax: 6
+  highPitchMultiplier: 0.25
+  maxRolloffDistance: 500
+  dopplerLevel: 1
+  useDoppler: 1
+  m_CarController: {fileID: 3572217605315140835}
 --- !u!1 &7047543953683433622
 GameObject:
   m_ObjectHideFlags: 0

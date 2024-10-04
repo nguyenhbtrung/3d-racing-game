@@ -21,6 +21,7 @@ public class CarController : VehicleController
     private float motorTorque;
     private float brakeTorque;
     private float wheelsRPM;
+    private float lastWheelsRPM;
     private float engineRPM;
     private float wheelbase;
     private float trackWidth;
@@ -38,7 +39,7 @@ public class CarController : VehicleController
 
     public float EngineRPM { get => engineRPM; set => engineRPM = value; }
     public int GearNum { get => gearNum; set => gearNum = value; }
-    
+    public float ShiftGearMaxRPM { get => shiftGearMaxRPM; set => shiftGearMaxRPM = value; }
 
     protected override void Awake()
     {
@@ -202,9 +203,14 @@ public class CarController : VehicleController
         float minEngineRPM = 1000.0f;
 
         CalculateWheelsRPM();
+        if ((Vertical > 0 && wheelsRPM > 0) || (Vertical < 0 && wheelsRPM < 0))
+        {
+            wheelsRPM = (Mathf.Abs(wheelsRPM) >= Mathf.Abs(lastWheelsRPM)) ? wheelsRPM : lastWheelsRPM;
+        }
         EngineRPM = Mathf.SmoothDamp(EngineRPM, minEngineRPM + Mathf.Abs(wheelsRPM) * engineRPMMultiplier * gears[GearNum], ref velocity, smoothTime);
-        EngineRPM = Mathf.Clamp(EngineRPM, EngineRPM, shiftGearMaxRPM + 1000);
+        EngineRPM = Mathf.Clamp(EngineRPM, EngineRPM, ShiftGearMaxRPM + 1000);
         motorTorque = motorTorqueMultiplier * Vertical * enginePower.Evaluate(EngineRPM);
+        lastWheelsRPM = wheelsRPM;
     }
 
     private void CalculateWheelsRPM()
@@ -230,7 +236,7 @@ public class CarController : VehicleController
         {
             return;
         }
-        if (EngineRPM > shiftGearMaxRPM &&
+        if (EngineRPM > ShiftGearMaxRPM &&
             GearNum < gears.Length - 1 &&
             !IsReverse() && CheckGears())
         {
