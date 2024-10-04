@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,8 @@ using UnityEngine;
 public class VehicleController : MonoBehaviour
 {
     [SerializeField] private GameObject speedometerUI;
+    [SerializeField] private ParticleSystem[] nitrousFlameParticles;
+    [SerializeField] private Color[] nitrousFlameColors;
     [SerializeField] private int startLane;
 
     protected IInputManager inputManager;
@@ -37,7 +40,7 @@ public class VehicleController : MonoBehaviour
     {
         inputManager = GetComponent<IInputManager>();
         Rb = GetComponent<Rigidbody>();
-        Nitrous = 20;
+        Nitrous = 100;
     }
 
     protected virtual void Update()
@@ -75,7 +78,25 @@ public class VehicleController : MonoBehaviour
         if (IsBoosting)
         {
             Rb.AddForce(transform.forward * thrust);
+            UpdateFlameColor();
+            foreach (var particle in nitrousFlameParticles)
+            {
+                particle.Play();
+            }
             Nitrous -= nitrousConsumption;
         }
+    }
+
+    private void UpdateFlameColor()
+    {
+        int index = (int)Nitrous / (int)(MaxNitrous / 4);
+        float k = ((int)Nitrous % (int)(MaxNitrous / 4)) / (MaxNitrous / 4);
+        if (index >= 4) return;
+        foreach (var particle in nitrousFlameParticles)
+        {
+            var main = particle.main;
+            main.startColor = Color.Lerp(nitrousFlameColors[index], nitrousFlameColors[index + 1], k);
+        }
+
     }
 }
