@@ -38,7 +38,7 @@ public class CameraController : MonoBehaviour
     private void FollowPlayer()
     {
         float kph = controller.Kph;
-        speed = Mathf.Lerp(speed, kph / 4, Time.deltaTime);
+        speed = (kph != 0) ? Mathf.Lerp(speed, kph / 4, Time.deltaTime) : 1;
 
         transform.position = Vector3.Lerp(transform.position, cameraConstraint.position, Time.deltaTime * speed);
         transform.LookAt(player.position);

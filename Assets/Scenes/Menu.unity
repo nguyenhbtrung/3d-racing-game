@@ -1329,7 +1329,7 @@ MonoBehaviour:
   - prefab: {fileID: 6356010169918276720, guid: 3763fc19b28471840af081127caa6492, type: 3}
     sprite: {fileID: 21300000, guid: d18422b8f0367da4ba68990109057c61, type: 3}
   - prefab: {fileID: 4538720373537248346, guid: dc7e4833d3947144c9d351445678dae7, type: 3}
-    sprite: {fileID: 21300000, guid: d18422b8f0367da4ba68990109057c61, type: 3}
+    sprite: {fileID: 21300000, guid: c3c942dd10944f24e907c48016a5907d, type: 3}
   vehicleObj: {fileID: 0}
   menuUIHandler: {fileID: 260827815}
 --- !u!1 &1098978244
