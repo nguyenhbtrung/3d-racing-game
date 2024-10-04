@@ -66,14 +66,5 @@ public class CameraController : MonoBehaviour
             isActivatedBoost = true;
             
         }
-
-        //if (Input.GetKey(KeyCode.LeftShift))
-        //{
-        //    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, boostedFOV, Time.deltaTime * smoothTime);
-        //}
-        //else
-        //{
-        //    Camera.main.fieldOfView = Mathf.Lerp(Camera.main.fieldOfView, defaultFOV, Time.deltaTime * smoothTime);
-        //}
     }
 }

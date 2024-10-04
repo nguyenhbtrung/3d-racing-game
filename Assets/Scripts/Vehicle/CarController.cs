@@ -7,6 +7,7 @@ using UnityEngine;
 public class CarController : VehicleController
 {
     [SerializeField] private AnimationCurve enginePower;
+    [SerializeField] private AudioSource skidSound;
     [SerializeField] private float[] gears;
     [SerializeField] private float[] gearChangeSpeeds;
     [SerializeField] private float shiftGearMaxRPM;
@@ -28,6 +29,7 @@ public class CarController : VehicleController
     private float steerCurrentRadius;
     private float downForce = 10;
     private int gearNum = 0;
+    private bool isSkidding = false;
 
     internal enum DriveType
     {
@@ -125,6 +127,7 @@ public class CarController : VehicleController
             {
                 wheel.SkidMark.emitting = true;
                 wheel.SmokeParticle.Emit(1);
+                isSkidding = true;
             }
             else
             {
@@ -141,6 +144,7 @@ public class CarController : VehicleController
                 if (Kph >= 60)
                 {
                     wheel.SmokeParticle.Emit(1);
+                    isSkidding = true;
                 }
             }
             else
@@ -149,11 +153,19 @@ public class CarController : VehicleController
             }
             
         }
-
-        foreach (var wheel in wheels)
+        if (isSkidding)
         {
+            if (!skidSound.isPlaying)
+            {
+                skidSound.Play();
+            }
             
         }
+        else
+        {
+            skidSound.Stop();
+        }
+        isSkidding = false;
     }
 
     private void AdjustDrag()
