@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     {
         public string name;
         public RacerWaypointFollower waypointFollower;
+        public bool isFinished;
     }
     [SerializeField] private RacerInfo[] racerInfos;
 
@@ -21,13 +22,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Waypoint startWaypoint;
     [SerializeField] private TMPro.TextMeshProUGUI playerRankText;
 
+    [SerializeField] private int totalRacerWaypoint;
+
     private VehicleController playerVehicleController;
+    public List<RacerInfo> finishList;
     private bool isGameActive = false;
 
     public static GameManager Instance { get => instance; set => instance = value; }
     public Waypoint StartWaypoint { get => startWaypoint; set => startWaypoint = value; }
     public bool IsGameActive { get => isGameActive; set => isGameActive = value; }
-
+    public int TotalRacerWaypoint { get => totalRacerWaypoint; private set => totalRacerWaypoint = value; }
 
     private void Awake()
     {
@@ -46,11 +50,13 @@ public class GameManager : MonoBehaviour
         {
             var racer = Instantiate(racers[i], startPositions[i], Quaternion.Euler(0, 180, 0));
             racerInfos[i].waypointFollower = racer.GetComponent<RacerWaypointFollower>();
+            racerInfos[i].isFinished = false;
         }
         //Instantiate(GameData.Instance.PlayerVehicle, new Vector3(-1039.9f, 1.83f, 2122.1f), Quaternion.Euler(0, 180, 0));
 
         playerVehicleController = GameObject.FindGameObjectWithTag("Player").GetComponent<VehicleController>();
         Instantiate(playerVehicleController.SpeedometerUI, speedometerUIParent.position, Quaternion.identity, speedometerUIParent);
+        finishList = new List<RacerInfo>();
     }
 
     private void Start()
@@ -117,6 +123,32 @@ public class GameManager : MonoBehaviour
             }
         }
         playerRankText.SetText($"{rank}/{racerInfos.Length}");
+    }
+
+    public void AddToFinishList(RacerWaypointFollower waypointFollower)
+    {
+        for (int i = 0; i < racerInfos.Length; i++)
+        {
+            if (racerInfos[i].waypointFollower == waypointFollower && !racerInfos[i].isFinished)
+            {
+                racerInfos[i].isFinished = true;
+                finishList.Add(racerInfos[i]);
+                break;
+            }
+        }
+
+        if (waypointFollower.CompareTag("Player"))
+        {
+            for (int i = 0; i < racerInfos.Length; i++)
+            {
+                if (!racerInfos[i].isFinished)
+                {
+                    racerInfos[i].isFinished = true;
+                    finishList.Add(racerInfos[i]);
+                }
+            }
+            IsGameActive = false;
+        }
     }
 
 }
