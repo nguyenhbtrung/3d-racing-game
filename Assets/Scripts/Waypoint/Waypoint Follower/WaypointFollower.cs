@@ -16,7 +16,7 @@ public class WaypointFollower : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.GetComponent<Waypoint>() == TargetWaypoint)
         {

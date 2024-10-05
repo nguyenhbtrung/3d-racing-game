@@ -3795,6 +3795,7 @@ GameObject:
   - component: {fileID: 5085843550119600708}
   - component: {fileID: 1557038402134046189}
   - component: {fileID: 3336698590848555640}
+  - component: {fileID: 2787278479482781933}
   m_Layer: 0
   m_Name: chiron
   m_TagString: Player
@@ -4074,6 +4075,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2787278479482781933
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4538720373537248346}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67a023891982d5945b245c228bfd697b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetWaypoint: {fileID: 0}
 --- !u!1 &4547680678890368603
 GameObject:
   m_ObjectHideFlags: 0
