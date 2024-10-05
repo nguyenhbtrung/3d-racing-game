@@ -23,7 +23,7 @@ public class CarController : VehicleController
     private float brakeTorque;
     private float wheelsRPM;
     private float lastWheelsRPM;
-    private float engineRPM;
+    private float engineRPM = 1000;
     private float wheelbase;
     private float trackWidth;
     private float steerCurrentRadius;
@@ -59,6 +59,11 @@ public class CarController : VehicleController
 
     protected override void Update()
     {
+        if (!GameManager.Instance.IsGameActive)
+        {
+            return;
+        }
+
         base.Update();
 
         AddDownForce();

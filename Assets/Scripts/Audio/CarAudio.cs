@@ -74,6 +74,8 @@ public class CarAudio : MonoBehaviour
         //Destroy all audio sources on this object:
         foreach (var source in GetComponents<AudioSource>())
         {
+            if (source.clip.name == "Skid")
+                continue;
             Destroy(source);
         }
 

@@ -5,19 +5,29 @@ using UnityEngine;
 
 public class RacerBotInputManager : MonoBehaviour, IInputManager
 {
-    [SerializeField] private Waypoint targetWaypoint;
+    private RacerWaypointFollower waypointFollower;
     [SerializeField] private VehicleController vehicleController;
     [SerializeField] private float horizontalSpeed;
 
     public float horizontal;
     public float vertical;
+
+    private void Awake()
+    {
+        waypointFollower = GetComponent<RacerWaypointFollower>();
+    }
+
     private void Update()
     {
     }
 
     public float GetHorizontalInput()
     {
-        Vector3 target = targetWaypoint.transform.position;
+        if (waypointFollower.TargetWaypoint == null)
+        {
+            return 0;
+        }
+        Vector3 target = waypointFollower.TargetWaypoint.transform.position;
         Vector3 direction = target - transform.position;
         direction = new Vector3(direction.x, 0, direction.z).normalized;
         float forwardValue = Vector3.Dot(transform.forward, direction);
@@ -46,11 +56,4 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         return (vehicleController.Kph >= 40 && (Mathf.Abs(horizontal) > 0.9 || vertical < 0));
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.GetComponent<Waypoint>() == targetWaypoint)
-        {
-            targetWaypoint = targetWaypoint.GetRandomNeighbour();
-        }
-    }
 }
