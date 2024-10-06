@@ -12,7 +12,7 @@ public class VehicleController : MonoBehaviour
 
     protected IInputManager inputManager;
     private Rigidbody rb;
-    private float kph;
+    public float kph;
     private float nitrous;
     private readonly float maxNitrous = 100;
     private float vertical;

@@ -8,6 +8,7 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
     private RacerWaypointFollower waypointFollower;
     [SerializeField] private VehicleController vehicleController;
     [SerializeField] private float horizontalSpeed;
+    [SerializeField] private float minSpeed = 60;
 
     public float horizontal;
     public float vertical;
@@ -76,7 +77,7 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         {
             return -1;
         }
-        if (vehicleController.Kph <= 20)
+        if (vehicleController.Kph <= minSpeed)
         {
             return 1;
         }

@@ -30187,6 +30187,7 @@ MonoBehaviour:
   - {r: 0.06666667, g: 0.06666666, b: 1, a: 1}
   - {r: 0.06666666, g: 1, b: 1, a: 1}
   startLane: 1
+  kph: 0
   enginePower:
     serializedVersion: 2
     m_Curve:
@@ -30262,6 +30263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehicleController: {fileID: 7268461774717458738}
   horizontalSpeed: 100
+  minSpeed: 80
   horizontal: 0
   vertical: 0
 --- !u!114 &396618856769243316
@@ -30398,6 +30400,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWaypoint: {fileID: 0}
+  waypointCount: 0
 --- !u!1 &8582788799455540760
 GameObject:
   m_ObjectHideFlags: 0
