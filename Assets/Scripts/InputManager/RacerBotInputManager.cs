@@ -12,6 +12,9 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
     public float horizontal;
     public float vertical;
 
+    private float stuckCount;
+    private bool isGoBack = false;
+
     private void Awake()
     {
         waypointFollower = GetComponent<RacerWaypointFollower>();
@@ -19,11 +22,37 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
 
     private void Update()
     {
+        if (GameManager.Instance != null && !GameManager.Instance.IsGameActive)
+        {
+            return;
+        }
+        CaculateStuckCount();
+    }
+
+    private void CaculateStuckCount()
+    {
+        if (vehicleController.Kph <= 5.0f)
+        {
+            stuckCount += Time.deltaTime;
+            
+        }
+        else if (stuckCount >= 0)
+        {
+            stuckCount -= Time.deltaTime * 2;
+        }
+        if (stuckCount >= 3)
+        {
+            isGoBack = true;
+        }
+        else if (stuckCount <= 0)
+        {
+            isGoBack = false;
+        }
     }
 
     public float GetHorizontalInput()
     {
-        if (waypointFollower.TargetWaypoint == null)
+        if (waypointFollower.TargetWaypoint == null || isGoBack)
         {
             return 0;
         }
@@ -43,6 +72,10 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
 
     public float GetVerticalInput()
     {
+        if (isGoBack)
+        {
+            return -1;
+        }
         return 1;
     }
 
