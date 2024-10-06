@@ -48,6 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neighbours: []
+  throttleStatus: 1
+  roadType: 4
+  laneWidth: 5.6
+  isHandBraking: 0
 --- !u!114 &1110262525476117177
 MonoBehaviour:
   m_ObjectHideFlags: 0

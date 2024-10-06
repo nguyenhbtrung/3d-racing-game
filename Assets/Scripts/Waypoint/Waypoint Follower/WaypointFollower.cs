@@ -5,6 +5,7 @@ using UnityEngine;
 public class WaypointFollower : MonoBehaviour
 {
     [SerializeField] private Waypoint targetWaypoint;
+    protected int currentLaneIndex = -1;
 
     public Waypoint TargetWaypoint { get => targetWaypoint; set => targetWaypoint = value; }
 
@@ -20,7 +21,7 @@ public class WaypointFollower : MonoBehaviour
     {
         if (other.GetComponent<Waypoint>() == TargetWaypoint)
         {
-            TargetWaypoint = TargetWaypoint.GetRandomNeighbour();
+            TargetWaypoint = TargetWaypoint.GetRandomNeighbour(ref currentLaneIndex);
         }
     }
 
@@ -32,5 +33,10 @@ public class WaypointFollower : MonoBehaviour
     public bool IsHandBraking()
     {
         return targetWaypoint.IsHandBraking;
+    }
+
+    public Vector3 GetTargetPosition()
+    {
+        return targetWaypoint.GetTargetPosition(currentLaneIndex);
     }
 }

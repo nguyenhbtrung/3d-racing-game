@@ -57,7 +57,8 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         {
             return 0;
         }
-        Vector3 target = waypointFollower.TargetWaypoint.transform.position;
+        Vector3 target = waypointFollower.GetTargetPosition();
+        Debug.DrawLine(transform.position, target);
         Vector3 direction = target - transform.position;
         direction = new Vector3(direction.x, 0, direction.z).normalized;
         float forwardValue = Vector3.Dot(transform.forward, direction);

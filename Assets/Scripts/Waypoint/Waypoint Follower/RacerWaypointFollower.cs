@@ -11,7 +11,7 @@ public class RacerWaypointFollower : WaypointFollower
     {
         if (this.CompareTag("Player") && other.CompareTag("Player Waypoint"))
         {
-            TargetWaypoint = other.GetComponent<Waypoint>().GetRandomNeighbour();
+            TargetWaypoint = other.GetComponent<Waypoint>().GetRandomNeighbour(ref currentLaneIndex);
             waypointCount++;
         }
 
