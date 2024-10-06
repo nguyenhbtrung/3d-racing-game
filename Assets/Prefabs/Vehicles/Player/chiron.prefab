@@ -3881,6 +3881,8 @@ MonoBehaviour:
   - {r: 0.06666667, g: 0.06666666, b: 1, a: 1}
   - {r: 0.06666666, g: 1, b: 1, a: 1}
   startLane: 1
+  maxSpeed: 250
+  kph: 0
   enginePower:
     serializedVersion: 2
     m_Curve:
@@ -4088,6 +4090,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWaypoint: {fileID: 0}
+  waypointCount: 0
 --- !u!1 &4547680678890368603
 GameObject:
   m_ObjectHideFlags: 0

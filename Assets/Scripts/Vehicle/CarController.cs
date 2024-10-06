@@ -175,8 +175,14 @@ public class CarController : VehicleController
 
     private void AdjustDrag()
     {
+        //if (Kph >= 60)
+        //{
+        //    Rb.drag = 0.1f;
+        //    return;
+        //}
         if (Vertical != 0)
         {
+            //Rb.drag = 0.005f * Kph / 1;
             Rb.drag = 0.005f;
         }
         if (Vertical == 0)
@@ -231,6 +237,7 @@ public class CarController : VehicleController
         EngineRPM = Mathf.SmoothDamp(EngineRPM, minEngineRPM + Mathf.Abs(wheelsRPM) * engineRPMMultiplier * gears[GearNum], ref velocity, smoothTime);
         EngineRPM = Mathf.Clamp(EngineRPM, EngineRPM, ShiftGearMaxRPM + 1000);
         motorTorque = motorTorqueMultiplier * Vertical * enginePower.Evaluate(EngineRPM);
+        motorTorque = (Kph < maxSpeed) ? motorTorque : 0;
         lastWheelsRPM = wheelsRPM;
     }
 

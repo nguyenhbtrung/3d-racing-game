@@ -9,6 +9,7 @@ public class VehicleController : MonoBehaviour
     [SerializeField] private ParticleSystem[] nitrousFlameParticles;
     [SerializeField] private Color[] nitrousFlameColors;
     [SerializeField] private int startLane;
+    [SerializeField] protected float maxSpeed = 250;
 
     protected IInputManager inputManager;
     private Rigidbody rb;
