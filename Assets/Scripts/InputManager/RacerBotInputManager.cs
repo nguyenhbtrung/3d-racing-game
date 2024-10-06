@@ -76,6 +76,10 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         {
             return -1;
         }
+        if (vehicleController.Kph <= 20)
+        {
+            return 1;
+        }
         return waypointFollower.GetThrottleStatus();
     }
 
