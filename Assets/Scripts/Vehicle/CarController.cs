@@ -59,7 +59,7 @@ public class CarController : VehicleController
 
     protected override void Update()
     {
-        if (!GameManager.Instance.IsGameActive)
+        if (GameManager.Instance != null && !GameManager.Instance.IsGameActive)
         {
             return;
         }

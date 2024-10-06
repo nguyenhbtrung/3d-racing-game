@@ -9,7 +9,7 @@ public class RacerWaypointFollower : WaypointFollower
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Finish Line") && waypointCount == GameManager.Instance.TotalRacerWaypoint)
+        if (other.CompareTag("Finish Line") && waypointCount >= GameManager.Instance.TotalRacerWaypoint)
         {
             GameManager.Instance.AddToFinishList(this);
         }

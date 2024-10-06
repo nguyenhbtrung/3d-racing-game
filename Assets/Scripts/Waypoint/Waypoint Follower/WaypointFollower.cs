@@ -23,4 +23,14 @@ public class WaypointFollower : MonoBehaviour
             TargetWaypoint = TargetWaypoint.GetRandomNeighbour();
         }
     }
+
+    public int GetThrottleStatus()
+    {
+        return (int)targetWaypoint.ThrottleStt;
+    }
+
+    public bool IsHandBraking()
+    {
+        return targetWaypoint.IsHandBraking;
+    }
 }

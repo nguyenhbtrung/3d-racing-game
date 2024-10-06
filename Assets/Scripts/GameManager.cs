@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -21,6 +22,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private RectTransform speedometerUIParent;
     [SerializeField] private Waypoint startWaypoint;
     [SerializeField] private TMPro.TextMeshProUGUI playerRankText;
+    [SerializeField] private GameObject rankingSlot;
+    [SerializeField] private GameObject rankingPanel;
+    [SerializeField] private Transform rankingContent;
+    [SerializeField] private Color[] rankingColors;
 
     [SerializeField] private int totalRacerWaypoint;
 
@@ -147,8 +152,28 @@ public class GameManager : MonoBehaviour
                     finishList.Add(racerInfos[i]);
                 }
             }
+            if (isGameActive)
+            {
+                ShowRankingPanel();
+            }
             IsGameActive = false;
         }
     }
 
+    private void ShowRankingPanel()
+    {
+        rankingPanel.SetActive(true);
+        int rank = 1;
+        foreach (var racer in finishList)
+        {
+            string name = racer.name;
+            GameObject slot = Instantiate(rankingSlot, rankingContent);
+            slot.GetComponent<Image>().color = rankingColors[rank % 2];
+            TMPro.TextMeshProUGUI rankText = slot.transform.Find("Text Rank").GetComponent<TMPro.TextMeshProUGUI>();
+            TMPro.TextMeshProUGUI nameText = slot.transform.Find("Text Name").GetComponent<TMPro.TextMeshProUGUI>();
+            rankText.SetText(rank.ToString());
+            nameText.SetText(name);
+            rank++;
+        }
+    }
 }

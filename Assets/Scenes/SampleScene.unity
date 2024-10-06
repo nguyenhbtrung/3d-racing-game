@@ -958,6 +958,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6012662463746259381, guid: ad68b2dd44b144c41b2969975eb85b58, type: 3}
+      propertyPath: targetWaypoint
+      value: 
+      objectReference: {fileID: 353582197}
     - target: {fileID: 8485746546485627725, guid: ad68b2dd44b144c41b2969975eb85b58, type: 3}
       propertyPath: m_Name
       value: car01_racer_bot

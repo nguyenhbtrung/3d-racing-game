@@ -2449,6 +2449,8 @@ MonoBehaviour:
   mapTemplates:
   - name: Track3.3
     sprite: {fileID: 21300000, guid: d18422b8f0367da4ba68990109057c61, type: 3}
+  - name: Track3.4
+    sprite: {fileID: 21300000, guid: d18422b8f0367da4ba68990109057c61, type: 3}
 --- !u!1 &1982043254
 GameObject:
   m_ObjectHideFlags: 0

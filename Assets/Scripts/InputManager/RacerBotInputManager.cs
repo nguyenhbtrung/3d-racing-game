@@ -76,7 +76,7 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         {
             return -1;
         }
-        return 1;
+        return waypointFollower.GetThrottleStatus();
     }
 
     public bool IsActivatedBoost()
@@ -86,7 +86,12 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
 
     public bool IsHandBraking()
     {
+        if (waypointFollower.IsHandBraking())
+        {
+            return true;
+        }
         return (vehicleController.Kph >= 40 && (Mathf.Abs(horizontal) > 0.9 || vertical < 0));
+        // 40, 0.9
     }
 
 }
