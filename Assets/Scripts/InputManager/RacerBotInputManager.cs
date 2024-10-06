@@ -86,7 +86,7 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
 
     public bool IsActivatedBoost()
     {
-        return false;
+        return vehicleController.Nitrous >= vehicleController.MaxNitrous / 2;
     }
 
     public bool IsHandBraking()

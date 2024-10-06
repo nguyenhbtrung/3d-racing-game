@@ -706,6 +706,7 @@ MonoBehaviour:
   - {r: 0.06666667, g: 0.06666666, b: 1, a: 1}
   - {r: 0.06666666, g: 1, b: 1, a: 1}
   startLane: 1
+  kph: 0
   enginePower:
     serializedVersion: 2
     m_Curve:
@@ -913,6 +914,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetWaypoint: {fileID: 0}
+  waypointCount: 0
 --- !u!1 &7047543953683433622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1658,6 +1660,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7066784398545685784, guid: 3bb6748068110e84bbb9e2979e56a6b3, type: 3}
+      propertyPath: moveWithTransform
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066784398545685784, guid: 3bb6748068110e84bbb9e2979e56a6b3, type: 3}
       propertyPath: ShapeModule.radiusThickness
       value: 1
       objectReference: {fileID: 0}
@@ -1898,6 +1904,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7066784398545685784, guid: 3bb6748068110e84bbb9e2979e56a6b3, type: 3}
       propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7066784398545685784, guid: 3bb6748068110e84bbb9e2979e56a6b3, type: 3}
+      propertyPath: moveWithTransform
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7066784398545685784, guid: 3bb6748068110e84bbb9e2979e56a6b3, type: 3}

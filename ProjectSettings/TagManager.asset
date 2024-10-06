@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Racer
   - Finish Line
+  - Player Waypoint
   layers:
   - Default
   - TransparentFX
