@@ -1331,13 +1331,15 @@ MonoBehaviour:
   - prefab: {fileID: 4538720373537248346, guid: dc7e4833d3947144c9d351445678dae7, type: 3}
     sprite: {fileID: 21300000, guid: c3c942dd10944f24e907c48016a5907d, type: 3}
   - prefab: {fileID: 563428930016247453, guid: 7d0971bde6ff5e54ca69cf9b1250b8b1, type: 3}
-    sprite: {fileID: 21300000, guid: c3c942dd10944f24e907c48016a5907d, type: 3}
+    sprite: {fileID: 21300000, guid: cfc3e6e87c0406d4dab4c9e3fe817ee3, type: 3}
   - prefab: {fileID: 3149537165266781405, guid: 4ef85cf574840264386b05abfd8da278, type: 3}
-    sprite: {fileID: 21300000, guid: c3c942dd10944f24e907c48016a5907d, type: 3}
+    sprite: {fileID: 21300000, guid: 42b5efbc8d81bcd4c9b4cb9058e7914b, type: 3}
   - prefab: {fileID: 563428930016247453, guid: 67592e6f8b1299e40a9068d62aa297ad, type: 3}
-    sprite: {fileID: 21300000, guid: c3c942dd10944f24e907c48016a5907d, type: 3}
+    sprite: {fileID: 21300000, guid: 7f8a54f485b3b6340bb4f54b7aa6a4d3, type: 3}
   - prefab: {fileID: 3149537165266781405, guid: 79217e26ac05dc743ab2b6f416084526, type: 3}
-    sprite: {fileID: 21300000, guid: c3c942dd10944f24e907c48016a5907d, type: 3}
+    sprite: {fileID: 21300000, guid: 95fd10fbc337c4a4495c00f3c427ffcb, type: 3}
+  - prefab: {fileID: 6578672779277524850, guid: a30fb480ddd878a41814e7038ba6b990, type: 3}
+    sprite: {fileID: 21300000, guid: ceb4fa08e13138944a82331c8adf870d, type: 3}
   vehicleObj: {fileID: 0}
   menuUIHandler: {fileID: 260827815}
 --- !u!1 &1098978244
@@ -2723,8 +2725,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8377627188595218072, guid: 4ef85cf574840264386b05abfd8da278, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8377627188595218072, guid: 4ef85cf574840264386b05abfd8da278, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 8377627188595218072, guid: 4ef85cf574840264386b05abfd8da278, type: 3}
       propertyPath: m_LocalPosition.y

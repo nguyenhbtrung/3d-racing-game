@@ -33,5 +33,7 @@ public class VehiclePicker : MonoBehaviour
         }
         vehicleObj = Instantiate(vehicleTemplates[index].prefab, Vector3.up * 1.7f, Quaternion.identity);
         vehicleObj.GetComponent<VehicleController>().enabled = false;
+        vehicleObj.transform.localScale = Vector3.one;
+        Debug.Log("scale: " + vehicleObj.transform.lossyScale);
     }
 }
