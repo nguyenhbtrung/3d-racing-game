@@ -26,6 +26,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject rankingPanel;
     [SerializeField] private Transform rankingContent;
     [SerializeField] private Color[] rankingColors;
+    [SerializeField] private GameObject racerMarkPrefab;
+    [SerializeField] private Transform racerCanvas;
 
     [SerializeField] private int totalRacerWaypoint;
 
@@ -56,6 +58,11 @@ public class GameManager : MonoBehaviour
             var racer = Instantiate(racers[i], startPositions[i], Quaternion.Euler(0, 180, 0));
             racerInfos[i].waypointFollower = racer.GetComponent<RacerWaypointFollower>();
             racerInfos[i].isFinished = false;
+            if (!racer.CompareTag("Player"))
+            {
+                var racerMark = Instantiate(racerMarkPrefab, racerCanvas);
+                racerMark.GetComponent<RacerMark>().Target = racer.transform;
+            }
         }
         //Instantiate(GameData.Instance.PlayerVehicle, new Vector3(-1039.9f, 1.83f, 2122.1f), Quaternion.Euler(0, 180, 0));
 

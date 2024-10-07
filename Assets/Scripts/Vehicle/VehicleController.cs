@@ -18,7 +18,7 @@ public class VehicleController : MonoBehaviour
     private readonly float maxNitrous = 100;
     private float vertical;
     private float horizontal;
-    private float thrust = 2500;
+    protected float thrust = 1000;
     private bool isBoosting = false;
 
 
@@ -85,6 +85,13 @@ public class VehicleController : MonoBehaviour
                 particle.Play();
             }
             Nitrous -= nitrousConsumption;
+        }
+        else
+        {
+            foreach (var particle in nitrousFlameParticles)
+            {
+                particle.Stop();
+            }
         }
     }
 

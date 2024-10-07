@@ -13,6 +13,7 @@ public class CarController : VehicleController
     [SerializeField] private float shiftGearMaxRPM;
     [SerializeField] private float shiftGearMinRPM;
     [SerializeField] private float steerMinRadius = 6;
+    [SerializeField] private float motorTorqueMultiplier = 3.6f;
 
 
     private Wheel[] wheels;
@@ -55,6 +56,7 @@ public class CarController : VehicleController
     private void Start()
     {
         CalculateSpecifications();
+        thrust = motorTorqueMultiplier * 1000;
     }
 
     protected override void Update()
@@ -219,7 +221,6 @@ public class CarController : VehicleController
 
     private void CalculateEnginePower()
     {
-        float motorTorqueMultiplier = 3.6f;
         float engineRPMMultiplier = 3.6f;
         float velocity = 0.0f;
         float smoothTime = 0.09f;

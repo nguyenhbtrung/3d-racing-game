@@ -5094,7 +5094,7 @@ Transform:
   m_GameObject: {fileID: 2373711393326634933}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0.574, y: -0.552, z: -0.43}
+  m_LocalPosition: {x: 0.574, y: -0.552, z: -2.05}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.011}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9793,8 +9793,8 @@ ParticleSystemRenderer:
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
-  m_VelocityScale: -0.5
-  m_LengthScale: -0.5
+  m_VelocityScale: -2
+  m_LengthScale: -2
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
@@ -9804,7 +9804,7 @@ ParticleSystemRenderer:
   m_EnableGPUInstancing: 0
   m_ApplyActiveColorSpace: 0
   m_AllowRoll: 1
-  m_FreeformStretching: 0
+  m_FreeformStretching: 1
   m_RotateWithStretchDirection: 1
   m_UseCustomVertexStreams: 1
   m_VertexStreams: 000304
@@ -9846,7 +9846,7 @@ Transform:
   m_GameObject: {fileID: 2433838245049233343}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -0.574, y: -0.552, z: -0.43}
+  m_LocalPosition: {x: -0.574, y: -0.552, z: -2.05}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.011}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14545,8 +14545,8 @@ ParticleSystemRenderer:
   m_MinParticleSize: 0
   m_MaxParticleSize: 0.5
   m_CameraVelocityScale: 0
-  m_VelocityScale: -0.5
-  m_LengthScale: -0.5
+  m_VelocityScale: -2
+  m_LengthScale: -2
   m_SortingFudge: 0
   m_NormalDirection: 1
   m_ShadowBias: 0
@@ -14556,7 +14556,7 @@ ParticleSystemRenderer:
   m_EnableGPUInstancing: 0
   m_ApplyActiveColorSpace: 0
   m_AllowRoll: 1
-  m_FreeformStretching: 0
+  m_FreeformStretching: 1
   m_RotateWithStretchDirection: 1
   m_UseCustomVertexStreams: 1
   m_VertexStreams: 000304
