@@ -3943,6 +3943,7 @@ MonoBehaviour:
   shiftGearMaxRPM: 8000
   shiftGearMinRPM: 5000
   steerMinRadius: 6
+  motorTorqueMultiplier: 3.6
   driveType: 0
 --- !u!114 &5085843550119600708
 MonoBehaviour:
@@ -8579,7 +8580,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 822903236376513551, guid: d1f5cd013d061b04185607c8128fe199, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3095533193863609503, guid: d1f5cd013d061b04185607c8128fe199, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8836,7 +8837,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 822903236376513551, guid: d1f5cd013d061b04185607c8128fe199, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3095533193863609503, guid: d1f5cd013d061b04185607c8128fe199, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8969,7 +8970,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 822903236376513551, guid: d1f5cd013d061b04185607c8128fe199, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3095533193863609503, guid: d1f5cd013d061b04185607c8128fe199, type: 3}
       propertyPath: m_LocalPosition.x

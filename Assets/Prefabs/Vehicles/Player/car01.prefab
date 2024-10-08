@@ -768,6 +768,7 @@ MonoBehaviour:
   shiftGearMaxRPM: 8000
   shiftGearMinRPM: 5000
   steerMinRadius: 6
+  motorTorqueMultiplier: 3.6
   driveType: 0
 --- !u!114 &693584743056121531
 MonoBehaviour:
@@ -1702,7 +1703,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7066784398545685784, guid: 3bb6748068110e84bbb9e2979e56a6b3, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7066784398545685784, guid: 3bb6748068110e84bbb9e2979e56a6b3, type: 3}
       propertyPath: prewarm
@@ -2069,7 +2070,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7066784398545685784, guid: 3bb6748068110e84bbb9e2979e56a6b3, type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7066784398545685784, guid: 3bb6748068110e84bbb9e2979e56a6b3, type: 3}
       propertyPath: prewarm

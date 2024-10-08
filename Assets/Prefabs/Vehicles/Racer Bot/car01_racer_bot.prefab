@@ -5115,7 +5115,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -9867,7 +9867,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -30249,6 +30249,7 @@ MonoBehaviour:
   shiftGearMaxRPM: 8000
   shiftGearMinRPM: 5000
   steerMinRadius: 6
+  motorTorqueMultiplier: 3.6
   driveType: 0
 --- !u!114 &411165758041022007
 MonoBehaviour:

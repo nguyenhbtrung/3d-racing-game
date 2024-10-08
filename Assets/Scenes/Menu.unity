@@ -1340,6 +1340,8 @@ MonoBehaviour:
     sprite: {fileID: 21300000, guid: 95fd10fbc337c4a4495c00f3c427ffcb, type: 3}
   - prefab: {fileID: 6578672779277524850, guid: a30fb480ddd878a41814e7038ba6b990, type: 3}
     sprite: {fileID: 21300000, guid: ceb4fa08e13138944a82331c8adf870d, type: 3}
+  - prefab: {fileID: 6356010169918276720, guid: 7329525e9abc14641990dc09b6cb1c91, type: 3}
+    sprite: {fileID: 21300000, guid: ceb4fa08e13138944a82331c8adf870d, type: 3}
   vehicleObj: {fileID: 0}
   menuUIHandler: {fileID: 260827815}
 --- !u!1 &1098978244
@@ -2457,11 +2459,11 @@ MonoBehaviour:
   mapSlotPrefab: {fileID: 8815428437186832908, guid: 654b83ee6a82fb24cb5cfbc7bdc49227, type: 3}
   content: {fileID: 1129754879}
   mapTemplates:
-  - name: Track3.3
-    sprite: {fileID: 21300000, guid: d18422b8f0367da4ba68990109057c61, type: 3}
   - name: Track3.4
     sprite: {fileID: 21300000, guid: d18422b8f0367da4ba68990109057c61, type: 3}
   - name: SampleScene
+    sprite: {fileID: 21300000, guid: d18422b8f0367da4ba68990109057c61, type: 3}
+  - name: Track3.5
     sprite: {fileID: 21300000, guid: d18422b8f0367da4ba68990109057c61, type: 3}
 --- !u!1 &1982043254
 GameObject:
