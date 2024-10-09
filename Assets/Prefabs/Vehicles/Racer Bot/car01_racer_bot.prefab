@@ -30107,7 +30107,7 @@ GameObject:
   - component: {fileID: 6012662463746259381}
   m_Layer: 0
   m_Name: car01_racer_bot
-  m_TagString: Untagged
+  m_TagString: Racer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

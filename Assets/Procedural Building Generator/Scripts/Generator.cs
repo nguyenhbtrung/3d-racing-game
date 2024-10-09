@@ -37,6 +37,7 @@ public class Generator : MonoBehaviour
 
     private void UpdateMeshVisibility()
     {
+#if UNITY_EDITOR
         if (!needMeshUpdate || this == null)
         {
             return;
@@ -47,10 +48,12 @@ public class Generator : MonoBehaviour
             meshRenderer.enabled = showMesh;
         }
         needMeshUpdate = false;
+#endif
     }
 
     public void Initialize()
     {
+#if UNITY_EDITOR
         if (area != null)
             DestroyImmediate(area.gameObject);
         cells = new List<Cell>();
@@ -59,6 +62,7 @@ public class Generator : MonoBehaviour
         showMesh = false;
         needMeshUpdate = true;
         UpdateMeshVisibility();
+#endif
     }
 
     public void InitGrid()

@@ -15,6 +15,7 @@ public class WaypointLinksDrawer : MonoBehaviour
 
     void OnDrawGizmos()
     {
+#if UNITY_EDITOR
         if (waypoint.Neighbours == null || waypoint.Neighbours.Length == 0)
         {
             return;
@@ -23,7 +24,7 @@ public class WaypointLinksDrawer : MonoBehaviour
         {
             if (neighbour == null)
                 continue;
-                Handles.color = color;
+            Handles.color = color;
             Vector3 direction = neighbour.transform.position - transform.position;
             Handles.DrawAAPolyLine(lineThickness, transform.position, neighbour.transform.position);
 
@@ -32,6 +33,7 @@ public class WaypointLinksDrawer : MonoBehaviour
             Handles.DrawAAPolyLine(lineThickness, neighbour.transform.position, neighbour.transform.position + right * arrowHeadLength);
             Handles.DrawAAPolyLine(lineThickness, neighbour.transform.position, neighbour.transform.position + left * arrowHeadLength);
         }
-        
+#endif
+
     }
 }
