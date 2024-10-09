@@ -1,14 +1,13 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RacerBotInputManager : MonoBehaviour, IInputManager
+public class NormalBotInputManager : MonoBehaviour, IInputManager
 {
-    private RacerWaypointFollower waypointFollower;
-    [SerializeField] private VehicleController vehicleController;
-    [SerializeField] private float horizontalSpeed;
-    [SerializeField] private float minSpeed = 60;
+    [SerializeField] private float minSpeed = 1;
+
+    private WaypointFollower waypointFollower;
+    private VehicleController vehicleController;
 
     public float horizontal;
     public float vertical;
@@ -18,7 +17,7 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
 
     private void Awake()
     {
-        waypointFollower = GetComponent<RacerWaypointFollower>();
+        waypointFollower = GetComponent<WaypointFollower>();
         vehicleController = GetComponent<VehicleController>();
     }
 
@@ -36,7 +35,7 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         if (vehicleController.Kph <= 5.0f)
         {
             stuckCount += Time.deltaTime;
-            
+
         }
         else if (stuckCount >= 0)
         {
@@ -65,7 +64,6 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         float forwardValue = Vector3.Dot(transform.forward, direction);
         float sideValue = Vector3.Dot(transform.right, direction);
         sideValue = (forwardValue > 0) ? sideValue : Mathf.Sign(sideValue);
-        //sideValue = (Mathf.Abs(sideValue) > 0.3 ) ? Mathf.Sign(sideValue) : 0;
 
         horizontal = sideValue;
         vertical = forwardValue;
@@ -88,7 +86,7 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
 
     public bool IsActivatedBoost()
     {
-        return vehicleController.Nitrous >= vehicleController.MaxNitrous / 2;
+        return false;
     }
 
     public bool IsHandBraking()
@@ -100,5 +98,4 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         return (vehicleController.Kph >= 40 && (Mathf.Abs(horizontal) > 0.9 || vertical < 0));
         // 40, 0.9
     }
-
 }
