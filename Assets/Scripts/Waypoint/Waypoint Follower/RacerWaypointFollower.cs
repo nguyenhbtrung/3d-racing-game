@@ -7,6 +7,14 @@ public class RacerWaypointFollower : WaypointFollower
 {
     public int waypointCount = 0;
 
+    private void Awake()
+    {
+        if (GameManager.Instance != null)
+        {
+            TargetWaypoint = GameManager.Instance.StartWaypoint;
+        }
+    }
+
     protected override void OnTriggerEnter(Collider other)
     {
         if (this.CompareTag("Player") && other.CompareTag("Player Waypoint"))

@@ -8,14 +8,7 @@ public class WaypointFollower : MonoBehaviour
     protected int currentLaneIndex = -1;
 
     public Waypoint TargetWaypoint { get => targetWaypoint; set => targetWaypoint = value; }
-
-    private void Awake()
-    {
-        if (GameManager.Instance != null)
-        {
-            TargetWaypoint = GameManager.Instance.StartWaypoint;
-        }
-    }
+    public int CurrentLaneIndex { get => currentLaneIndex; set => currentLaneIndex = value; }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
@@ -37,6 +30,6 @@ public class WaypointFollower : MonoBehaviour
 
     public Vector3 GetTargetPosition()
     {
-        return targetWaypoint.GetTargetPosition(currentLaneIndex);
+        return targetWaypoint.GetTargetPosition(CurrentLaneIndex);
     }
 }
