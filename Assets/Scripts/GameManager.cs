@@ -171,6 +171,7 @@ public class GameManager : MonoBehaviour
     private void ShowRankingPanel()
     {
         rankingPanel.SetActive(true);
+        var leaderboardAnimation = rankingPanel.GetComponent<LeaderboardAnimation>();
         int rank = 1;
         foreach (var racer in finishList)
         {
@@ -181,7 +182,9 @@ public class GameManager : MonoBehaviour
             TMPro.TextMeshProUGUI nameText = slot.transform.Find("Text Name").GetComponent<TMPro.TextMeshProUGUI>();
             rankText.SetText(rank.ToString());
             nameText.SetText(name);
+            leaderboardAnimation.LeaderboardRows.Add(slot);
             rank++;
         }
+        leaderboardAnimation.ShowLeaderboard();
     }
 }
