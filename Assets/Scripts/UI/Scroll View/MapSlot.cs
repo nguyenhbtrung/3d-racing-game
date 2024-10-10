@@ -11,6 +11,6 @@ public class MapSlot : MonoBehaviour
 
     public void SelectMap()
     {
-        SceneManager.LoadScene(mapName);
+        MapLoader.Instance.LoadMap(mapName);
     }
 }
