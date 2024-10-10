@@ -30105,6 +30105,7 @@ GameObject:
   - component: {fileID: 396618856769243316}
   - component: {fileID: 1687727667835195619}
   - component: {fileID: 6012662463746259381}
+  - component: {fileID: 7371856524288633254}
   m_Layer: 0
   m_Name: car01_normal_bot
   m_TagString: Untagged
@@ -30401,6 +30402,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetWaypoint: {fileID: 0}
   waypointCount: 0
+--- !u!114 &7371856524288633254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8485746546485627725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a69cd48701bb441b908a010c387a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  duration: 60
 --- !u!1 &8582788799455540760
 GameObject:
   m_ObjectHideFlags: 0
