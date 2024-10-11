@@ -18,7 +18,7 @@ public class InGameUIHandler : MonoBehaviour
     public void BackToMenuScene()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Menu");
+        MapLoader.Instance.LoadMap("Menu");
     }
 
     public void Pause()

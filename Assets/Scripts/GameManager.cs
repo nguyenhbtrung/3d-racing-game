@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject racerMarkPrefab;
     [SerializeField] private Transform racerMarkParent;
 
+    [Header("Countdown")]
+    [SerializeField] private CountdownAnimation1[] countdownAnimations;
+
     [SerializeField] private int totalRacerWaypoint;
 
     private VehicleController playerVehicleController;
@@ -101,11 +104,27 @@ public class GameManager : MonoBehaviour
     }
     private IEnumerator CountDown()
     {
-        int counter = 4;
-        while (counter > 0)
+        var readyAnimation = countdownAnimations[countdownAnimations.Length - 1];
+        readyAnimation.gameObject.SetActive(true);
+        readyAnimation.ShowAnimation2();
+        yield return new WaitForSeconds(1.9f);
+        readyAnimation.gameObject.SetActive(false);
+
+
+        int counter = 5;
+        while (counter >= 0)
         {
+            if (counter >= 0 && counter < countdownAnimations.Length)
+            {
+                if (counter < countdownAnimations.Length - 1)
+                {
+                    countdownAnimations[counter + 1].gameObject.SetActive(false);
+                }
+                countdownAnimations[counter].gameObject.SetActive(true);
+                countdownAnimations[counter].ShowAnimation1();
+            }
             Debug.Log(counter);
-            yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(0.54f);
             counter--;
         }
         Debug.Log("Start!!");
