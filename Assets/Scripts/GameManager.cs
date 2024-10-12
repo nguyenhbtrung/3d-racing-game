@@ -28,11 +28,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Color[] rankingColors;
     [SerializeField] private GameObject racerMarkPrefab;
     [SerializeField] private Transform racerMarkParent;
+    [SerializeField] private int totalRacerWaypoint;
 
     [Header("Countdown")]
     [SerializeField] private CountdownAnimation1[] countdownAnimations;
 
-    [SerializeField] private int totalRacerWaypoint;
+
 
     private VehicleController playerVehicleController;
     public List<RacerInfo> finishList;
@@ -124,7 +125,7 @@ public class GameManager : MonoBehaviour
                 countdownAnimations[counter].ShowAnimation1();
             }
             Debug.Log(counter);
-            yield return new WaitForSeconds(0.54f);
+            yield return new WaitForSeconds(1);
             counter--;
         }
         Debug.Log("Start!!");

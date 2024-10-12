@@ -90,8 +90,8 @@ public class CountdownAnimation1 : MonoBehaviour
         imageObject.sprite = sprites[2];
         imageObject.rectTransform.anchoredPosition = startPositions[2]; 
 
-        LeanTween.moveX(imageObject.rectTransform, 20, 0.2f).setDelay(0.2f).setEase(LeanTweenType.easeInOutQuad); 
-        LeanTween.alpha(imageObject.rectTransform, 0f, 0.1f).setDelay(0.3f).setOnComplete(ResetSprite); 
+        LeanTween.moveX(imageObject.rectTransform, startPositions[2].x + 20, 0.2f).setDelay(0.5f).setEase(LeanTweenType.easeInOutQuad); 
+        LeanTween.alpha(imageObject.rectTransform, 0f, 0.1f).setDelay(0.6f).setOnComplete(ResetSprite); 
     }
 
     private void ResetSprite()
