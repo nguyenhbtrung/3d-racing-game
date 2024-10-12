@@ -33,7 +33,8 @@ public class GameManager : MonoBehaviour
     [Header("Countdown")]
     [SerializeField] private CountdownAnimation1[] countdownAnimations;
 
-
+    [Header("Spawn bot")]
+    [SerializeField] private GameObject spawnSystem;
 
     private VehicleController playerVehicleController;
     public List<RacerInfo> finishList;
@@ -52,6 +53,11 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+
+        if (GameData.Instance.HaveNormalBot)
+        {
+            spawnSystem.SetActive(true);
+        }
 
         int playerStartLane = GameData.Instance.PlayerVehicle.GetComponent<VehicleController>().StartLane;
         racers[playerStartLane] = GameData.Instance.PlayerVehicle;

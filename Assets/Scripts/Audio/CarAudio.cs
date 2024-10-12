@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using Random = UnityEngine.Random;
 
 
@@ -47,6 +48,7 @@ public class CarAudio : MonoBehaviour
     private bool m_StartedSound; // flag for knowing if we have started sounds
                                  //private CarController m_CarController; // Reference to car we are controlling
     public CarController m_CarController;
+    public AudioMixerGroup audioMixerGroup;
 
     private void StartSound()
     {
@@ -167,6 +169,7 @@ public class CarAudio : MonoBehaviour
         source.volume = 0;
         source.spatialBlend = 1;
         source.loop = true;
+        source.outputAudioMixerGroup = audioMixerGroup;
 
         // start the clip from a random point
         source.time = Random.Range(0f, clip.length);

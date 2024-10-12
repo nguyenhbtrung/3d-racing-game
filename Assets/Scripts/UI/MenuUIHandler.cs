@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.Audio;
 using System;
 using UnityEngine.UI;
+using System.Linq;
+using Unity.VisualScripting;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -28,9 +30,22 @@ public class MenuUIHandler : MonoBehaviour
     [SerializeField] private Sprite muteSprite;
     [SerializeField] private Sprite unmuteSprite;
 
+    [SerializeField] private ToggleGroup qualityToggleGroup;
 
+    [SerializeField] private ToggleGroup resolutionToggleGroup;
+    [SerializeField] private GameObject optionTogglePrefab;
+
+    [SerializeField] private Toggle modeHaveNormalBotToggle;
+
+
+    private Resolution[] resolutions;
     private bool isMute = false;
     private float currentOverallVolume;
+
+    private void Start()
+    {
+        GetResolution();
+    }
 
     public void HandleOptionButtonClick(int index)
     {
@@ -54,11 +69,46 @@ public class MenuUIHandler : MonoBehaviour
         settingPanel.gameObject.SetActive(true);
         GetSettingValues();
         HandleOptionButtonClick(0);
+        
     }
 
     private void GetSettingValues()
     {
+        GetQuality();
         GetVolume();
+        GetMode();
+    }
+
+    private void GetQuality()
+    {
+        int qualityIndex = QualitySettings.GetQualityLevel();
+        Transform option = qualityToggleGroup.transform.GetChild(qualityIndex);
+        option.GetComponentInChildren<Toggle>().isOn = true;
+    }
+
+    private void GetResolution()
+    {
+        resolutions = Screen.resolutions;
+        for (int i = 0; i < resolutions.Length; i++)
+        {
+            string optionString = resolutions[i].width + " x " + resolutions[i].height;
+            var optionToggle = Instantiate(optionTogglePrefab, resolutionToggleGroup.transform);
+            Toggle toggle = optionToggle.GetComponentInChildren<Toggle>();
+            toggle.group = resolutionToggleGroup;
+            toggle.GetComponentInChildren<TMPro.TextMeshProUGUI>().SetText(optionString);
+
+            if (resolutions[i].width == Screen.currentResolution.width &&
+                resolutions[i].height == Screen.currentResolution.height)
+            {
+                toggle.isOn = true;
+            }
+
+            int index = i;
+            toggle.onValueChanged.AddListener(delegate
+            {
+                SetResolution(index);
+            });
+        }
     }
 
     private void GetVolume()
@@ -70,6 +120,11 @@ public class MenuUIHandler : MonoBehaviour
         int percentage = (int)((volume - min) / (max - min) * 100);
         OverallVolumePercentageText.SetText(percentage.ToString() + "%");
 
+    }
+
+    public void GetMode()
+    {
+        modeHaveNormalBotToggle.isOn = GameData.Instance.HaveNormalBot;
     }
     public void SetVolume(float volume)
     {
@@ -124,6 +179,17 @@ public class MenuUIHandler : MonoBehaviour
     public void SetQuality(int qualityIndex)
     {
         QualitySettings.SetQualityLevel(qualityIndex);
+    }
+
+    public void SetResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, true);
+    }
+
+    public void SetMode(bool haveNormalBot)
+    {
+        GameData.Instance.HaveNormalBot = haveNormalBot;
     }
 
     public void CloseSettings()

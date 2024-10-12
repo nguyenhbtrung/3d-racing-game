@@ -402,6 +402,7 @@ MonoBehaviour:
   dopplerLevel: 1
   useDoppler: 1
   m_CarController: {fileID: 8535418173443833767}
+  audioMixerGroup: {fileID: 24300002, guid: 93d2ffdf67ef41a47984a26ab6ee2464, type: 2}
 --- !u!82 &7348384685054115510
 AudioSource:
   m_ObjectHideFlags: 0
@@ -411,7 +412,7 @@ AudioSource:
   m_GameObject: {fileID: 563428930016247453}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: 93d2ffdf67ef41a47984a26ab6ee2464, type: 2}
   m_audioClip: {fileID: 8300000, guid: 40d56d01d0d9d59419211b1acb271d4b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.5
