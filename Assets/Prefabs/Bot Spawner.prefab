@@ -45,4 +45,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waypoints: []
-  spawnRate: 3
+  startTime: 5
+  spawnRate: 4
