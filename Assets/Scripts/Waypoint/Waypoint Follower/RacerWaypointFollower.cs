@@ -17,10 +17,19 @@ public class RacerWaypointFollower : WaypointFollower
 
     protected override void OnTriggerEnter(Collider other)
     {
-        if (this.CompareTag("Player") && other.CompareTag("Player Waypoint"))
+
+        if (this.CompareTag("Player"))
         {
-            TargetWaypoint = other.GetComponent<Waypoint>().GetRandomNeighbour(ref currentLaneIndex);
-            waypointCount++;
+            if (other.CompareTag("Root Waypoint"))
+            {
+                other.GetComponent<RootWaypoint>().CalculateBranchesWaypointCount(waypointCount + 1);
+            }
+            if (other.CompareTag("Branch Waypoint"))
+            {
+                var branchWaypoint = other.GetComponent<BranchWaypoint>();
+                TargetWaypoint = branchWaypoint.GetRandomNeighbour(ref currentLaneIndex);
+                waypointCount = branchWaypoint.WaypointCount;
+            }
         }
 
         if (other.CompareTag("Finish Line") && waypointCount >= GameManager.Instance.TotalRacerWaypoint)
