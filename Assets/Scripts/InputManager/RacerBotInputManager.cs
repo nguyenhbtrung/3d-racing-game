@@ -14,6 +14,7 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
     public float vertical;
 
     private float stuckCount;
+    private float avoidanceValue = 0;
     private bool isGoBack = false;
 
     private void Awake()
@@ -70,8 +71,11 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         horizontal = sideValue;
         vertical = forwardValue;
 
+        //sideValue = HandleAvoidance(sideValue, transform.forward);
+
         return sideValue;
     }
+
 
     public float GetVerticalInput()
     {
@@ -101,4 +105,46 @@ public class RacerBotInputManager : MonoBehaviour, IInputManager
         // 40, 0.9
     }
 
+    private float HandleAvoidance(float sideValue, Vector3 direction)
+    {
+        float forwardDistance = 15f;
+        float sideDistance = 7f;
+        RaycastHit hit;
+        if (vertical < 0.7f)
+        {
+            return sideValue;
+        }
+        if (Physics.Raycast(transform.position, direction, out hit, forwardDistance))
+        {
+            if (hit.collider.CompareTag("Normal Bot"))
+            {
+                if (avoidanceValue != 0)
+                {
+                    return avoidanceValue;
+                }
+                Vector3 leftCheck = transform.position - transform.right;
+                Vector3 rightCheck = transform.position + transform.right;
+                bool leftHit = Physics.Raycast(transform.position, leftCheck, sideDistance);
+                bool rightHit = Physics.Raycast(transform.position, rightCheck, sideDistance);
+                if (!leftHit && rightHit)
+                {
+                    avoidanceValue = -1;
+                }
+                else if (leftHit && !rightHit)
+                {
+                    avoidanceValue = 1;
+                }
+                else if (!leftHit && !rightHit)
+                {
+                    avoidanceValue = Mathf.Sign(sideValue);
+                }
+            }
+            else
+            {
+                avoidanceValue = 0;
+            }
+        }
+
+        return avoidanceValue;
+    }
 }

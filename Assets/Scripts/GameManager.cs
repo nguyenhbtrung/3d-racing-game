@@ -130,11 +130,9 @@ public class GameManager : MonoBehaviour
                 countdownAnimations[counter].gameObject.SetActive(true);
                 countdownAnimations[counter].ShowAnimation1();
             }
-            Debug.Log(counter);
             yield return new WaitForSeconds(1);
             counter--;
         }
-        Debug.Log("Start!!");
         IsGameActive = true;
     }
 

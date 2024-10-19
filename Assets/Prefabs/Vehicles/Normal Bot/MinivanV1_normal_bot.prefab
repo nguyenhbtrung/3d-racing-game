@@ -49,7 +49,7 @@ GameObject:
   - component: {fileID: 5749748954820645315}
   m_Layer: 0
   m_Name: Car Body
-  m_TagString: Untagged
+  m_TagString: Normal Bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 550681733403622224}
   m_Layer: 0
   m_Name: MinivanV1_normal_bot
-  m_TagString: Untagged
+  m_TagString: Normal Bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

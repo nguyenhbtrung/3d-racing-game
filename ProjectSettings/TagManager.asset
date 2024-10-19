@@ -9,6 +9,7 @@ TagManager:
   - Destroyer
   - Branch Waypoint
   - Root Waypoint
+  - Normal Bot
   layers:
   - Default
   - TransparentFX

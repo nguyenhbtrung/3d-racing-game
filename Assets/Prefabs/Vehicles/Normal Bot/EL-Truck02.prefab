@@ -5521,7 +5521,7 @@ GameObject:
   - component: {fileID: 7842717613706956234}
   m_Layer: 0
   m_Name: EL-Truck02
-  m_TagString: Untagged
+  m_TagString: Normal Bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -11080,7 +11080,7 @@ GameObject:
   - component: {fileID: 2417298269510317694}
   m_Layer: 0
   m_Name: Car Body
-  m_TagString: Untagged
+  m_TagString: Normal Bot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
