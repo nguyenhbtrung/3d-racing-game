@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class RacerWaypointFollower : WaypointFollower
 {
+    private Waypoint lastWaypoint;
     public int waypointCount = 0;
 
     private void Awake()
@@ -39,6 +40,7 @@ public class RacerWaypointFollower : WaypointFollower
 
         if (other.GetComponent<Waypoint>() == TargetWaypoint)
         {
+            lastWaypoint = TargetWaypoint;
             waypointCount++;
         }
         base.OnTriggerEnter(other);
@@ -48,5 +50,19 @@ public class RacerWaypointFollower : WaypointFollower
     {
         float distanceToTargetWp = Vector3.Distance(transform.position, TargetWaypoint.transform.position);
         return Tuple.Create(waypointCount, distanceToTargetWp);
+    }
+
+    public void BackOnTrack()
+    {
+        if (lastWaypoint == null)
+        {
+            return;
+        }
+        Vector3 newPosition = lastWaypoint.transform.position;
+        newPosition.y = 2.0f;
+        transform.position = newPosition;
+        transform.LookAt(TargetWaypoint.transform.position);
+
+        Camera.main.transform.GetComponent<CameraController>().MoveToConstraintPosition();
     }
 }

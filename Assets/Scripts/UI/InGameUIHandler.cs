@@ -12,6 +12,14 @@ public class InGameUIHandler : MonoBehaviour
     [SerializeField] private GameObject panomaricMinimap;
     [SerializeField] private Transform panomaricDestination;
 
+    private RacerWaypointFollower playerWaypointFollower;
+
+    private void Start()
+    {
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        playerWaypointFollower = player.GetComponent<RacerWaypointFollower>();
+    }
+
     private void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
@@ -21,6 +29,10 @@ public class InGameUIHandler : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             SwitchMinimap();
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            playerWaypointFollower.BackOnTrack();
         }
     }
 

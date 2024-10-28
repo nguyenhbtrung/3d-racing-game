@@ -67,4 +67,9 @@ public class CameraController : MonoBehaviour
             
         }
     }
+
+    public void MoveToConstraintPosition()
+    {
+        transform.position = cameraConstraint.position;
+    }
 }
