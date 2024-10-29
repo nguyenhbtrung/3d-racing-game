@@ -11,6 +11,9 @@ public class InGameUIHandler : MonoBehaviour
     [SerializeField] private Camera panomaricCamera;
     [SerializeField] private GameObject panomaricMinimap;
     [SerializeField] private Transform panomaricDestination;
+    [SerializeField] private GameObject minimapIcon;
+    [SerializeField] private GameObject pMinimapIcon;
+
 
     private RacerWaypointFollower playerWaypointFollower;
 
@@ -36,19 +39,22 @@ public class InGameUIHandler : MonoBehaviour
         }
     }
 
-    private void SwitchMinimap()
+    public void SwitchMinimap()
     {
         if (!panomaricMinimap.activeInHierarchy)
         {
             panomaricCamera.transform.SetPositionAndRotation(minimapCamera.transform.position, minimapCamera.transform.rotation);
             panomaricCamera.orthographicSize = minimapCamera.orthographicSize;
+            minimapIcon.SetActive(false);
+            pMinimapIcon.SetActive(true);
             StartCoroutine(MinimapToPanomaric());
         }
         else
         {
             panomaricCamera.transform.SetPositionAndRotation(minimapCamera.transform.position, minimapCamera.transform.rotation);
             panomaricCamera.orthographicSize = 1020.0f;
-            
+            minimapIcon.SetActive(true);
+            pMinimapIcon.SetActive(false);
             StartCoroutine(MinimapFromPanomaric());
         }
     }
