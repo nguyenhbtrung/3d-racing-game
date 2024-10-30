@@ -52,7 +52,7 @@ public class RacerWaypointFollower : WaypointFollower
         return Tuple.Create(waypointCount, distanceToTargetWp);
     }
 
-    public void BackOnTrack()
+    public void ReturnTrack()
     {
         if (lastWaypoint == null)
         {

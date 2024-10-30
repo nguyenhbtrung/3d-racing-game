@@ -6,13 +6,15 @@ using UnityEngine.SceneManagement;
 
 public class InGameUIHandler : MonoBehaviour
 {
-    [SerializeField] private GameObject optionsPanel;
+    [SerializeField] private PauseScreen pauseScreen;
+    [SerializeField] private GameObject mainUI;
     [SerializeField] private Camera minimapCamera;
     [SerializeField] private Camera panomaricCamera;
     [SerializeField] private GameObject panomaricMinimap;
     [SerializeField] private Transform panomaricDestination;
     [SerializeField] private GameObject minimapIcon;
     [SerializeField] private GameObject pMinimapIcon;
+
 
 
     private RacerWaypointFollower playerWaypointFollower;
@@ -35,7 +37,7 @@ public class InGameUIHandler : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.R))
         {
-            playerWaypointFollower.BackOnTrack();
+            ReturnTrack();
         }
     }
 
@@ -57,6 +59,12 @@ public class InGameUIHandler : MonoBehaviour
             pMinimapIcon.SetActive(false);
             StartCoroutine(MinimapFromPanomaric());
         }
+    }
+
+    public void ReturnTrack()
+    {
+        if (playerWaypointFollower != null)
+            playerWaypointFollower.ReturnTrack();
     }
 
     private IEnumerator MinimapToPanomaric()
@@ -118,14 +126,16 @@ public class InGameUIHandler : MonoBehaviour
 
     public void Pause()
     {
-        Time.timeScale = 0;
-        optionsPanel.SetActive(true);
+        mainUI.SetActive(false);
+        pauseScreen.Pause();
     }
 
     public void Continue()
     {
-        Time.timeScale = 1;
-        optionsPanel.SetActive(false);
+        pauseScreen.Resume(() =>
+        {
+            mainUI.SetActive(true);
+        });
     }
 
 }

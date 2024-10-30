@@ -21,11 +21,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Vector3[] startPositions;
     [SerializeField] private RectTransform speedometerUIParent;
     [SerializeField] private Waypoint startWaypoint;
+    [SerializeField] private GameObject mainUI;
+
+    [Header("Leaderboard")]
     [SerializeField] private TMPro.TextMeshProUGUI playerRankText;
     [SerializeField] private GameObject rankingSlot;
     [SerializeField] private GameObject rankingPanel;
     [SerializeField] private Transform rankingContent;
     [SerializeField] private Color[] rankingColors;
+
+    [Header("Racer marks")]
     [SerializeField] private GameObject racerMarkPrefab;
     [SerializeField] private Transform racerMarkParent;
     [SerializeField] private int totalRacerWaypoint;
@@ -194,6 +199,7 @@ public class GameManager : MonoBehaviour
 
     private void ShowRankingPanel()
     {
+        mainUI.SetActive(false);
         rankingPanel.SetActive(true);
         var leaderboardAnimation = rankingPanel.GetComponent<LeaderboardAnimation>();
         int rank = 1;
