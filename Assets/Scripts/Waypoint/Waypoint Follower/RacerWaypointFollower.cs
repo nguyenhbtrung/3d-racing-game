@@ -23,7 +23,7 @@ public class RacerWaypointFollower : WaypointFollower
         {
             if (other.CompareTag("Root Waypoint"))
             {
-                other.GetComponent<RootWaypoint>().CalculateBranchesWaypointCount(waypointCount + 1);
+                other.GetComponent<RootWaypoint>().CalculateBranchesWaypointCount(waypointCount + 2);
             }
             if (other.CompareTag("Branch Waypoint"))
             {

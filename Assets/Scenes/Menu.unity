@@ -1553,7 +1553,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 47.7, y: 1.300003}
+  m_AnchoredPosition: {x: 47.7, y: -7.4}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &180663324
@@ -1578,15 +1578,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Garage
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d058ec4f06b76a347be1dd0b58a4a467, type: 2}
+  m_sharedMaterial: {fileID: 5702004603296165786, guid: d058ec4f06b76a347be1dd0b58a4a467, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1603,13 +1603,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 15
+  m_fontSizeBase: 15
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 0
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -2767,13 +2767,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
   m_fontSizeMax: 0
-  m_fontStyle: 0
+  m_fontStyle: 19
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -8177,7 +8177,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u0110\u1ECD ph\xE2n gi\u1EA3i"
+  m_text: "\u0110\u1ED9 ph\xE2n gi\u1EA3i"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -11427,11 +11427,9 @@ MonoBehaviour:
   mapSlotPrefab: {fileID: 8815428437186832908, guid: 654b83ee6a82fb24cb5cfbc7bdc49227, type: 3}
   content: {fileID: 1129754879}
   mapTemplates:
-  - name: Track3.5
-    sprite: {fileID: 21300000, guid: fd0715818b995cf418c343d6a36bb988, type: 3}
-  - name: Track3.5 Beta
-    sprite: {fileID: 21300000, guid: fd0715818b995cf418c343d6a36bb988, type: 3}
   - name: Track3.5.6
+    sprite: {fileID: 21300000, guid: fd0715818b995cf418c343d6a36bb988, type: 3}
+  - name: Track3.5.6 Beta
     sprite: {fileID: 21300000, guid: fd0715818b995cf418c343d6a36bb988, type: 3}
 --- !u!1 &1961704415
 GameObject:
