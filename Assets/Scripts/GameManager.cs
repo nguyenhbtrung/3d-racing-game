@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static GameManager;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class GameManager : MonoBehaviour
         public string name;
         public RacerWaypointFollower waypointFollower;
         public bool isFinished;
+        public float time;
     }
     [SerializeField] private RacerInfo[] racerInfos;
 
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Leaderboard")]
     [SerializeField] private TMPro.TextMeshProUGUI playerRankText;
+    [SerializeField] private TMPro.TextMeshProUGUI playerTimeText;
     [SerializeField] private GameObject rankingSlot;
     [SerializeField] private GameObject rankingPanel;
     [SerializeField] private Transform rankingContent;
@@ -44,6 +47,7 @@ public class GameManager : MonoBehaviour
     private VehicleController playerVehicleController;
     public List<RacerInfo> finishList;
     private bool isGameActive = false;
+    private float time = 0;
 
     public static GameManager Instance { get => instance; set => instance = value; }
     public Waypoint StartWaypoint { get => startWaypoint; set => startWaypoint = value; }
@@ -96,6 +100,43 @@ public class GameManager : MonoBehaviour
     {
         SortRacerInfos();
         UpdateplayerRank();
+        CalculateRacerTime();
+    }
+
+    private void CalculateRacerTime()
+    {
+        if (!isGameActive)
+        {
+            return;
+        }
+        //for (int i = 0; i < racerInfos.Length; i++)
+        //{
+        //    racerInfos[i].time += Time.deltaTime;
+        //    if (racerInfos[i].name == "Player")
+        //    {
+        //        float time = racerInfos[i].time; 
+
+        //        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+        //        string formattedTime = string.Format("{0:D2}:{1:D2}:{2:D3}", timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
+
+        //        playerTimeText.SetText(formattedTime);
+        //    }
+        //}
+        time += Time.deltaTime;
+        string formattedTime = GetFormattedTime(time);
+
+        playerTimeText.SetText(formattedTime);
+    }
+
+    private string GetFormattedTime(float time)
+    {
+        if (time < 0)
+        {
+            return "--:--:---";
+        }
+        TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+        string formattedTime = string.Format("{0:D2}:{1:D2}:{2:D3}", timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds);
+        return formattedTime;
     }
 
     private void SortRacerInfos()
@@ -161,7 +202,7 @@ public class GameManager : MonoBehaviour
             if (racerInfos[i].name == "Player")
             {
                 rank = i + 1;
-                break; 
+                break;
             }
         }
         playerRankText.SetText($"{rank}/{racerInfos.Length}");
@@ -174,6 +215,7 @@ public class GameManager : MonoBehaviour
             if (racerInfos[i].waypointFollower == waypointFollower && !racerInfos[i].isFinished)
             {
                 racerInfos[i].isFinished = true;
+                racerInfos[i].time = time;
                 finishList.Add(racerInfos[i]);
                 break;
             }
@@ -186,6 +228,7 @@ public class GameManager : MonoBehaviour
                 if (!racerInfos[i].isFinished)
                 {
                     racerInfos[i].isFinished = true;
+                    racerInfos[i].time = -1;
                     finishList.Add(racerInfos[i]);
                 }
             }
@@ -210,8 +253,10 @@ public class GameManager : MonoBehaviour
             slot.GetComponent<Image>().color = rankingColors[rank % 2];
             TMPro.TextMeshProUGUI rankText = slot.transform.Find("Text Rank").GetComponent<TMPro.TextMeshProUGUI>();
             TMPro.TextMeshProUGUI nameText = slot.transform.Find("Text Name").GetComponent<TMPro.TextMeshProUGUI>();
+            TMPro.TextMeshProUGUI timeText = slot.transform.Find("Text Time").GetComponent<TMPro.TextMeshProUGUI>();
             rankText.SetText(rank.ToString());
             nameText.SetText(name);
+            timeText.SetText(GetFormattedTime(racer.time));
             leaderboardAnimation.LeaderboardRows.Add(slot);
             rank++;
         }
